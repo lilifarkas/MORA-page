@@ -1,0 +1,32 @@
+.main-page {
+    margin-top: 50px;
+}
+
+.main-page-header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.main-page-header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.main-page-content {
+    padding: 20px;
+    line-height: 1.6;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 767px) {
+    .main-page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .main-page-content {
+        font-size: 1rem;
+    }
+}
