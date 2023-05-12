@@ -1,7 +1,7 @@
-header {
+.main {
     position: relative;
     height: 100vh;
-    background-image: url('4 másolata.png');
+    background-image: url('Névtelen terv (16).png');
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -35,5 +35,13 @@ h1, h4 {
 
 .btn-primary:hover {
     background-color: #0d6efd;
+    color: white;
+}
+
+.ctaButton{
+    color: #0d6efd;
+}
+
+.ctaButton:hover{
     color: white;
 }
