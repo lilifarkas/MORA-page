@@ -1,5 +1,6 @@
 .form-group {
     margin-bottom: 1.5rem;
+    width: 500px;
 }
 
 label {
@@ -33,11 +34,27 @@ button[type='submit']:hover {
     border-color: #0b5ed7;
 }
 
-.main{
+.main1{
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
     margin-top: 20px;
     justify-content: center;
+}
+
+.hero2{
+    position: relative;
+    height: 700px;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.error{
+    color: #d70b0b;
+}
+
+.success{
+    width: 500px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
