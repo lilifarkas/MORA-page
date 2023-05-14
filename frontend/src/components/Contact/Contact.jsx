@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './Contact.css';
 import bgImg from "./Névtelen terv (20).png";
+import emailjs from 'emailjs-com';
 
 function Contact() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
+    useEffect(() => {
+        let timer;
+        if (success) {
+            timer = setTimeout(() => {
+                setSuccess('');
+            }, 10000);
+        }
+        return () => clearTimeout(timer);
+    }, [success]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,11 +28,24 @@ function Contact() {
             setError('Please enter a valid email address');
         } else {
             console.log(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
-            // Send email using emailjs or a similar service
-            setName('');
-            setEmail('');
-            setMessage('');
-            setError('');
+            // Send email
+            emailjs.send(
+                'service_m8bql7c',
+                'template_gf5b8yl',
+                { from_name: name, from_email: email, message: message },
+                '_OPM3OGf4upRH17EZ'
+            )
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    setName('');
+                    setEmail('');
+                    setMessage('');
+                    setError('');
+                    setSuccess('Thank you for your message! We will contact you as soon as possible!');
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    setError('Failed to send email. Please try again later.');
+                });
         }
     };
 
@@ -69,6 +94,7 @@ function Contact() {
                                 onChange={(e) => setMessage(e.target.value)}
                             ></textarea>
                         </div>
+                        {success && <div className="success" style={{color: '#ffffff'}}>{success}</div>}
                         <button type="submit" className="btn btn-primary">
                             Submit
                         </button>

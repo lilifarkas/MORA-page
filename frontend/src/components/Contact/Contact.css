@@ -52,3 +52,9 @@ button[type='submit']:hover {
     color: #d70b0b;
 }
 
+.success{
+    width: 500px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
