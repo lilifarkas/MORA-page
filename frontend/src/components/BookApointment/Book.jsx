@@ -15,12 +15,11 @@ function Book(){
     const [selectedDate, setSelectedDate] = useState(null);
 
     function getTileClassName({ date, view }) {
-        const dayOfWeek = date.getDay();
-        if (greyDays.includes(dayOfWeek)) {
+        const today = new Date();
+        if (date < today || date.getDay() === 0) {
             return 'grey-day';
-        } else if (greenDays.includes(dayOfWeek)) {
+        } else if (greenDays.includes(date.getDay())) {
             return 'green-day';
-            
         }
     }
     
@@ -29,7 +28,7 @@ function Book(){
     }
 
     function handleDayClick(date) {
-        if (greyDays.includes(date.getDay())) {
+        if (date < new Date() || date.getDay() === 0 || date.getDay() === 1 || date.getDay() === 2) {
             console.log('Clicked on a grey day');
             setClickedGreyDay(true);
             setSelectedDate(null);

@@ -126,8 +126,9 @@
 /*}*/
 
 .doctorsPic{
-    width: 700px;
+    width: 600px;
     margin-top: 50px;
+    border-radius: 20%;
 }
 
 .text-container {
@@ -143,35 +144,17 @@
     margin-left: 150px; 
 }
 
-/*.main-page {*/
-/*    margin-top: 50px;*/
-/*}*/
+.about2{
+    background-color: rgb(74,100,111);
+    color: white;
+    border-top-right-radius: 100%;
+    border-top-left-radius: 100%;
+    gap: 10%;
+    height: 300px;
+    align-items: end;
+}
 
-/*.main-page-header {*/
-/*    background-color: #333;*/
-/*    color: white;*/
-/*    padding: 20px;*/
-/*    text-align: center;*/
-/*}*/
-
-/*.main-page-header h1 {*/
-/*    font-size: 2rem;*/
-/*    font-weight: bold;*/
-/*    margin: 0;*/
-/*}*/
-
-/*.main-page-content {*/
-/*    padding: 20px;*/
-/*    line-height: 1.6;*/
-/*    font-size: 1.2rem;*/
-/*}*/
-
-/*@media (max-width: 767px) {*/
-/*    .main-page-header h1 {*/
-/*        font-size: 1.5rem;*/
-/*    }*/
-
-/*    .main-page-content {*/
-/*        font-size: 1rem;*/
-/*    }*/
-/*}*/
+.child{
+    width: 250px;
+    margin-bottom: 50px;
+}
