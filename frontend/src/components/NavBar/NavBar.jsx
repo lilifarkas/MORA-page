@@ -8,7 +8,7 @@ function NavBar(){
     
     return(
         <header id="home">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">
                         <img
@@ -33,7 +33,6 @@ function NavBar(){
                                 <Link
                                     activeClass="active"
                                     to="home"
-                                    spy={true}
                                     smooth={true}
                                     offset={-70}
                                     duration={200}
@@ -46,7 +45,6 @@ function NavBar(){
                                 <Link
                                     activeClass="active"
                                     to="about"
-                                    spy={true}
                                     smooth={true}
                                     offset={-70}
                                     duration={200}
@@ -59,7 +57,6 @@ function NavBar(){
                                 <Link
                                     activeClass="active"
                                     to="appointment"
-                                    spy={true}
                                     smooth={true}
                                     offset={-70}
                                     duration={200}
@@ -72,7 +69,6 @@ function NavBar(){
                                 <Link
                                     activeClass="active"
                                     to="contact"
-                                    spy={true}
                                     smooth={true}
                                     offset={-70}
                                     duration={200}
