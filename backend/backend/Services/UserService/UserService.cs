@@ -19,8 +19,6 @@ public class UserService: IUserService
 
         return await _context.Users
             .Where(p => p.ID == user.ID)
-            .Include(p => p.Name)
-            .Include(p => p.Email)
             .FirstOrDefaultAsync() ?? throw new InvalidOperationException();
     }
 
@@ -44,10 +42,23 @@ public class UserService: IUserService
         return await _context.Users.ToListAsync();
     }
 
-    public async Task Update(User entity)
+    public async Task Update(User entity, long id)
     {
-        _context.Users.Update(entity);
-        await _context.SaveChangesAsync();
+        var user = await _context.Users.FirstAsync(t => t.ID == id);
+    
+        if (user != null)
+        {
+            //_context.Entry(user).CurrentValues.SetValues(entity);
+            user.Name = entity.Name;
+            user.Email = entity.Email;
+            user.Phone = entity.Phone;
+            user.Password = entity.Password;
+            await _context.SaveChangesAsync();
+        }
+        else
+        {
+            throw new InvalidOperationException("User not found."); // Or handle the case when the user is not found.
+        }
     }
 
     public async Task Delete(long id)

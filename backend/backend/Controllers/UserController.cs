@@ -7,9 +7,9 @@ namespace backend.Controllers;
 [ApiController, Route("/user")]
 public class UserController: ControllerBase
 {
-    private readonly UserService _service;
+    private readonly IUserService _service;
    
-    public UserController(UserService service)
+    public UserController(IUserService service)
     {
         _service = service;
     }
@@ -17,7 +17,7 @@ public class UserController: ControllerBase
     [HttpGet("/users/{id}")]
     public async Task<User> GetUserById(long id)
     {
-        return await _service.Get(id);
+        return await _service.GetById(id);
     }
     
     [HttpGet]
@@ -29,7 +29,7 @@ public class UserController: ControllerBase
     [HttpPut("/users/update/{id}")]
     public async Task UpdateUser(long id, [FromBody] User user)
     {
-        await _service.Update(user);
+        await _service.Update(user, id);
     }
     
     [HttpDelete("/users/delete/{id}")]
