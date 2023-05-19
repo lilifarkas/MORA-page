@@ -38,4 +38,12 @@ public class DateService: IDateService
         _context.BookedDates.Remove(date);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<BookedDate>> GetUserDates(long id)
+    {
+        return await _context.Users
+            .Where(p => p.ID == id)
+            .Select(x => x.BookedDatess)
+            .FirstOrDefaultAsync() ?? throw new InvalidOperationException();
+    }
 }
