@@ -5,6 +5,7 @@ import bgImg from "./Névtelen terv (25).png";
 function Register() {
     const[registerForm, setRegisterForm] = useState({
         "name": "",
+        "role": "",
         "email": "",
         "phoneNumber": "",
         "password": "",
@@ -14,7 +15,7 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:8080/',{
+        const response = await fetch('https://localhost:7230/register',{
             method: 'POST',
             // headers: {
             //     'Authorization' : `Bearer ${localStorage.getItem("token")}`,
@@ -32,10 +33,10 @@ function Register() {
         }
 
         setRegisterForm({
-            "firstName": '',
-            "lastName": '',
+            "name": '',
+            "role": '',
             "email": '',
-            "username": '',
+            "phoneNumber": '',
             "password": '',
             "confirmPassword": ''
         });
