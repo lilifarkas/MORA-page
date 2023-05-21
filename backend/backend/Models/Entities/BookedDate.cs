@@ -8,4 +8,5 @@ public class BookedDate
     public long ID { get; set; }
     public DateTime Date { get; set; }
     public User User { get; set; }
+    public DateTime BookedTime { get; set; }
 }
