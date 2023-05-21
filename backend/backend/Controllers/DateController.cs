@@ -8,9 +8,9 @@ namespace backend.Controllers;
 [ApiController, Route("/dates")]
 public class DateController: ControllerBase
 {
-    private readonly DateService _service;
+    private readonly IDateService _service;
    
-    public DateController(DateService service)
+    public DateController(IDateService service)
     {
         _service = service;
     }
