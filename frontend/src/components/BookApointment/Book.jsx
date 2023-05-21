@@ -3,7 +3,7 @@ import 'react-calendar/dist/Calendar.css';
 import {useState} from "react";
 import './Book.css'
 import bgImg from "./Névtelen terv (23).png";
-
+import { NavLink } from "react-router-dom";
 
 
 function Book(){
@@ -47,6 +47,21 @@ function Book(){
                 <div className="hero-text">
                     <h1>Book appointment</h1>
                 </div>
+            </div>
+            <div>
+                <h3>To book an appointment please Sign in or Sign up!</h3>
+            </div>
+            <div>
+                <NavLink className="button-text" to="/register">
+                    <button className="btn button">
+                        SIGN UP
+                    </button>
+                </NavLink>
+                <NavLink className="button-text" to="/login">
+                    <button className="btn button">
+                        SIGN IN
+                    </button>
+                </NavLink>
             </div>
             <div className="d-flex justify-content-center">
                 <Calendar
