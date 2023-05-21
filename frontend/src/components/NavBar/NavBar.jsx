@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBar.css';
 import pic from "./1660149889759865_page-0001-removebg-preview.png"
 import { Link } from "react-scroll";
-
+import { NavLink } from "react-router-dom";
 
 function NavBar(){
     
@@ -76,6 +76,18 @@ function NavBar(){
                                 >
                                     Contact
                                 </Link>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink
+                                    activeClass="active"
+                                    to="/register"
+                                    smooth={true}
+                                    offset={-70}
+                                    duration={200}
+                                    className="nav-link"
+                                >
+                                    Register
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
