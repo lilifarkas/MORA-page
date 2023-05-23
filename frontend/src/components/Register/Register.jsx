@@ -19,10 +19,10 @@ function Register() {
 
         const response = await fetch('https://localhost:7230/register',{
             method: 'POST',
-            // headers: {
-            //     'Authorization' : `Bearer ${localStorage.getItem("token")}`,
-            //     'Content-Type': 'application/json'
-            // },
+            headers: {
+                // 'Authorization' : `Bearer ${localStorage.getItem("token")}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(registerForm)
         });
 
@@ -56,7 +56,6 @@ function Register() {
                 <div className="hero-overlay"></div>
                 <div className="hero-text">
                     <NavLink
-                        activeClass="active"
                         to="/"
                         className="back"
                     >
