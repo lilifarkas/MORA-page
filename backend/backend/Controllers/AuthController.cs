@@ -50,6 +50,7 @@ public class AuthController : ControllerBase
         var registrationUser = new User()
         {
             Name = registerRequest.Name,
+            Role = registerRequest.Role,
             Email = registerRequest.Email,
             Phone = registerRequest.PhoneNumber,
             Password = passwordHash
