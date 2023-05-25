@@ -51,7 +51,7 @@ function Register() {
 
     return (
         <div className="main1" id="contact">
-            <div className="hero2">
+            <div className="main2">
                 <img src={bgImg} alt="doctor" />
                 <div className="hero-overlay"></div>
                 <div className="hero-text">
