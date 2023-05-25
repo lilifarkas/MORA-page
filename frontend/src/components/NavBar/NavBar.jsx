@@ -38,7 +38,7 @@ function NavBar(){
                                     duration={200}
                                     className="nav-link"
                                 >
-                                    Home
+                                    <p className="nav-title">Home</p>
                                 </Link>
                             </li>
                             <li className="nav-item">
@@ -50,7 +50,7 @@ function NavBar(){
                                     duration={200}
                                     className="nav-link"
                                 >
-                                    About
+                                    <p className="nav-title">About</p>
                                 </Link>
                             </li>
                             <li className="nav-item">
@@ -62,7 +62,7 @@ function NavBar(){
                                     duration={200}
                                     className="nav-link"
                                 >
-                                    Book appointment
+                                    <p className="nav-title">Appointment</p>
                                 </Link>
                             </li>
                             <li className="nav-item">
@@ -74,19 +74,27 @@ function NavBar(){
                                     duration={200}
                                     className="nav-link"
                                 >
-                                    Contact
+                                    <p className="nav-title">Contact</p>
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <NavLink
-                                    activeClass="active"
-                                    to="/register"
-                                    smooth={true}
+                                    to="/login"
                                     offset={-70}
                                     duration={200}
                                     className="nav-link"
                                 >
-                                    Register
+                                    Sign In
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink
+                                    to="/register"
+                                    offset={-70}
+                                    duration={200}
+                                    className="nav-link"
+                                >
+                                    Sign Up
                                 </NavLink>
                             </li>
                         </ul>

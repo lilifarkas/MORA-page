@@ -18,7 +18,11 @@
 }
 
 .nav-link:hover {
-    color: #000000;
+    color: rgb(203,170,119)
+}
+
+.nav-title{
+    cursor: pointer;
 }
 
 /*.navbar {*/
