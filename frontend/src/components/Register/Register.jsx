@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import './Register.css';
 import bgImg from "./Névtelen terv (25).png";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import { FiArrowLeft } from 'react-icons/fi';
 
 function Register() {
+    const navigate = useNavigate();
     const[registerForm, setRegisterForm] = useState({
         "name": "",
         "role": "",
@@ -43,7 +44,10 @@ function Register() {
             "confirmPassword": ''
         });
 
-        if(response.ok) alert("User Successfully Registered")
+        if(response.ok) {
+            alert("User Successfully Registered")
+            navigate('/login');
+        }
         setTimeout(() => {
 
         }, 1000);
