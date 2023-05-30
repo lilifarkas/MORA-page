@@ -43,7 +43,7 @@ public class DateService: IDateService
     {
         return await _context.Users
             .Where(p => p.ID == id)
-            .Select(x => x.BookedDatess)
+            .Select(x => x.BookedDates)
             .FirstOrDefaultAsync() ?? throw new InvalidOperationException();
     }
 }

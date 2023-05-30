@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import './Register.css';
 import bgImg from "./Névtelen terv (25).png";
+import {NavLink, useNavigate} from "react-router-dom";
+import { FiArrowLeft } from 'react-icons/fi';
 
 function Register() {
+    const navigate = useNavigate();
     const[registerForm, setRegisterForm] = useState({
         "name": "",
         "role": "",
@@ -17,10 +20,10 @@ function Register() {
 
         const response = await fetch('https://localhost:7230/register',{
             method: 'POST',
-            // headers: {
-            //     'Authorization' : `Bearer ${localStorage.getItem("token")}`,
-            //     'Content-Type': 'application/json'
-            // },
+            headers: {
+                // 'Authorization' : `Bearer ${localStorage.getItem("token")}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(registerForm)
         });
 
@@ -41,7 +44,10 @@ function Register() {
             "confirmPassword": ''
         });
 
-        if(response.ok) alert("User Successfully Registered")
+        if(response.ok) {
+            alert("User Successfully Registered")
+            navigate('/login');
+        }
         setTimeout(() => {
 
         }, 1000);
@@ -49,10 +55,17 @@ function Register() {
 
     return (
         <div className="main1" id="contact">
-            <div className="hero2">
+            <div className="main2">
                 <img src={bgImg} alt="doctor" />
                 <div className="hero-overlay"></div>
                 <div className="hero-text">
+                    <NavLink
+                        to="/"
+                        className="back"
+                    >
+                        <FiArrowLeft className="back-icon" />
+                        Back
+                    </NavLink>
                     <h1>Register</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
@@ -60,7 +73,7 @@ function Register() {
                             <input
                                 type="text"
                                 className="form-control"
-                                id="nameInput"
+                                id="name"
                                 placeholder="Enter your name"
                                 style={{textAlign: 'center'}}
                                 value={registerForm.name}
@@ -72,7 +85,7 @@ function Register() {
                             <input
                                 type="email"
                                 className="form-control"
-                                id="emailInput"
+                                id="email"
                                 placeholder="Enter your email"
                                 style={{textAlign: 'center'}}
                                 value={registerForm.email}
@@ -82,9 +95,9 @@ function Register() {
                         <div className="form-group">
                             <label htmlFor="emailInput">Phone Number</label>
                             <input
-                                type="email"
+                                type="text"
                                 className="form-control"
-                                id="emailInput"
+                                id="phoneNumber"
                                 placeholder="Enter your phone number"
                                 style={{textAlign: 'center'}}
                                 value={registerForm.phoneNumber}
@@ -94,9 +107,9 @@ function Register() {
                         <div className="form-group">
                             <label htmlFor="emailInput">Password</label>
                             <input
-                                type="email"
+                                type="password"
                                 className="form-control"
-                                id="emailInput"
+                                id="passwordInput"
                                 placeholder="Enter the password"
                                 style={{textAlign: 'center'}}
                                 value={registerForm.password}
@@ -106,9 +119,9 @@ function Register() {
                         <div className="form-group">
                             <label htmlFor="emailInput">Password again</label>
                             <input
-                                type="email"
+                                type="password"
                                 className="form-control"
-                                id="emailInput"
+                                id="confirmPassword"
                                 placeholder="Enter the password again"
                                 style={{textAlign: 'center'}}
                                 value={registerForm.confirmPassword}

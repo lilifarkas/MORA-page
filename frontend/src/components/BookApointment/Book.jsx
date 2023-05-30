@@ -1,12 +1,43 @@
 import { Calendar } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import './Book.css'
 import bgImg from "./Névtelen terv (23).png";
 import { NavLink } from "react-router-dom";
 
 
 function Book(){
+
+    const [response, setResponse] = useState(false);
+    const url = "https://localhost:7230/get-user";
+
+    useEffect(() => {
+        async function getUser() {
+            const response = await fetch(url, {
+                method : 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+            });
+            if (response.ok) {
+                return true;
+            }else{
+                const errorResponse = await response.json();
+                alert(errorResponse)
+                console.log(errorResponse);
+                return false;
+            }
+        }
+
+        getUser().then(result => {
+            setResponse(result);
+        }).catch(error => {
+            console.error(error);
+        });
+
+        return;
+    }, []);
 
     const [date, setDate] = useState(new Date());
     const greyDays = [1, 2, 0]; // Monday, Tuesday, Sunday
@@ -48,39 +79,51 @@ function Book(){
                     <h1>Book appointment</h1>
                 </div>
             </div>
-            <div>
-                <h3>To book an appointment please Sign in or Sign up!</h3>
-            </div>
-            <div>
-                <NavLink className="button-text" to="/register">
-                    <button className="btn button">
-                        SIGN UP
-                    </button>
-                </NavLink>
-                <NavLink className="button-text" to="/login">
-                    <button className="btn button">
-                        SIGN IN
-                    </button>
-                </NavLink>
-            </div>
-            <div className="d-flex justify-content-center">
-                <Calendar
-                    value={selectedDate || new Date()}
-                    onChange={handleDateChange}
-                    onClickDay={handleDayClick}
-                    tileClassName={getTileClassName}
-                />
-            </div>
-            {clickedGreyDay && (
-                <div className="message">
-                    <h2>This day is unavailable!</h2>
-                </div>
+            {!response && (
+                <>
+                    <div className="d-flex flex-column justify-content-center align-items-center gap-5">
+                        <div>
+                            <h3 className="text-to-book">To book an appointment please Sign in or Sign up!</h3>
+                        </div>
+                        <div className="d-flex flex-row gap-5 justify-content-center">
+                            <NavLink className="button-text" to="/register">
+                                <button className="btn btn-primary">
+                                    SIGN UP
+                                </button>
+                            </NavLink>
+                            <NavLink className="button-text" to="/login">
+                                <button className="btn btn-primary">
+                                    SIGN IN
+                                </button>
+                            </NavLink>
+                        </div>
+                    </div>
+                </>
             )}
-            <div className="hours-container">
-                {selectedDate && greenDays.includes(selectedDate.getDay()) && (
-                    <AvailableHours date={selectedDate} />
-                )}
-            </div>
+
+            {response && (
+                <>
+                    <div className="d-flex justify-content-center">
+                        <Calendar
+                            value={selectedDate || new Date()}
+                            onChange={handleDateChange}
+                            onClickDay={handleDayClick}
+                            tileClassName={getTileClassName}
+                        />
+                    </div>
+                    {clickedGreyDay && (
+                        <div className="message">
+                            <h2>This day is unavailable!</h2>
+                        </div>
+                    )}
+                    <div className="hours-container">
+                        {selectedDate && greenDays.includes(selectedDate.getDay()) && (
+                            <AvailableHours date={selectedDate} />
+                        )}
+                    </div>
+                </>
+            )}
+            
         </div>
     )
 }

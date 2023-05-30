@@ -16,14 +16,14 @@
 }
 
 h1, h4 {
-    color: #0d6efd;
+    color: rgb(203,170,119);
     white-space: nowrap;
 }
 
 .btn-primary {
     background-color: #fff;
-    color: #0d6efd;
-    border-color: #0d6efd;
+    color: rgb(74,100,111);
+    border-color: rgb(74,100,111);
     border-radius: 30px;
     padding: 10px 25px;
     font-size: 1.2rem;
@@ -34,14 +34,14 @@ h1, h4 {
 }
 
 .btn-primary:hover {
-    background-color: #0d6efd;
-    color: white;
+    background-color: rgb(74,100,111);
+    color: rgb(203,170,119)
 }
 
 .ctaButton{
-    color: #0d6efd;
+    color: rgb(74,100,111);
 }
 
 .ctaButton:hover{
-    color: white;
+    color: rgb(203,170,119)
 }
