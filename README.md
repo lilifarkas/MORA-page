@@ -16,8 +16,18 @@ Authentication and Authorization: JWT tokens are utilized for secure authenticat
 To get started with the Health Center Page application, follow the instructions below:
 
 Clone the repository
+
+
 Install the required dependencies for the frontend by navigating to the frontend directory and running npm install.
+
+
 Set up the backend by navigating to the backend directory and configuring the connection string in the appsettings.json file with your MS SQL database credentials.
+
+
 Run the backend application by executing the command dotnet run in the backend directory.
+
+
 Run the frontend application by executing the command npm start in the frontend directory.
+
+
 Access the application by opening a web browser and navigating to http://localhost:3000.
