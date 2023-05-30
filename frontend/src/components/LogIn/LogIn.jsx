@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './LogIn.css';
 import bgImg from "./Névtelen terv (25).png";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import { FiArrowLeft } from 'react-icons/fi';
 
 function LogIn() {
@@ -9,6 +9,7 @@ function LogIn() {
         "username": "",
         "password": ""
     })
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,14 +20,16 @@ function LogIn() {
                 // 'Authorization' : `Bearer ${localStorage.getItem("token")}`,
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify(LogInForm)
         });
 
         if (!response.ok) {
             const errorResponse = await response.json();
-            alert(errorResponse)
-            console.log(errorResponse);
-            return
+            const errorMessage = errorResponse.errorMessages[0];
+            alert(errorMessage)
+            console.log(errorMessage);
+            return;
         }
 
         setLogInForm({
@@ -34,7 +37,10 @@ function LogIn() {
             "password": ''
         });
 
-        if(response.ok) alert("User logged in")
+        if(response.ok){
+            alert("User logged in")
+            navigate("/")
+        } 
         setTimeout(() => {
 
         }, 1000);
