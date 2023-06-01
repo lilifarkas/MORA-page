@@ -10,6 +10,7 @@ import Register from "./components/Register/Register"
 import Profile from "./components/Profile/Profile"
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Edit from "./components/Profile/EditProfile"
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/login" element={[ <LogIn />]} />
                         <Route path="/register" element={[ <Register />]} />
                         <Route path="/profile" element={[ <Profile />]} />
+                        <Route path="/edit" element={[ <Edit />]} />
                     </Routes>
             </Router>
         </>
