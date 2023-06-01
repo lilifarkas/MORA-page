@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './Register.css';
-import bgImg from "./Névtelen terv (25).png";
+import bgImg from "../../images/register.png";
 import {NavLink, useNavigate} from "react-router-dom";
 import { FiArrowLeft } from 'react-icons/fi';
 

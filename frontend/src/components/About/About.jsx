@@ -1,7 +1,7 @@
 import './About.css'
-import bgImg from './Névtelen terv (22).png';
-import doctorImg from './Névtelen terv (17).png';
-import missionImg from './Névtelen terv (24).png';
+import bgImg from '../../images/Névtelen terv (22).png';
+import doctorImg from '../../images/Névtelen terv (17).png';
+import missionImg from '../../images/Névtelen terv (24).png';
 
 function MainPage(){
     
