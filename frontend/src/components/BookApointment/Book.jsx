@@ -1,44 +1,13 @@
 import { Calendar } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import './Book.css'
-import bgImg from "./Névtelen terv (23).png";
+import bgImg from "../../images/Névtelen terv (23).png";
 import { NavLink } from "react-router-dom";
-
+import useFetchUser from '../../hooks/useFetchUser';
 
 function Book(){
-
-    const [response, setResponse] = useState(false);
-    const url = "https://localhost:7230/get-user";
-
-    useEffect(() => {
-        async function getUser() {
-            const response = await fetch(url, {
-                method : 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-            });
-            if (response.ok) {
-                return true;
-            }else{
-                const errorResponse = await response.json();
-                alert(errorResponse)
-                console.log(errorResponse);
-                return false;
-            }
-        }
-
-        getUser().then(result => {
-            setResponse(result);
-        }).catch(error => {
-            console.error(error);
-        });
-
-        return;
-    }, []);
-
+    const user = useFetchUser();
     const [date, setDate] = useState(new Date());
     const greyDays = [1, 2, 0]; // Monday, Tuesday, Sunday
     const greenDays = [3, 4, 5, 6]; // Wednesday, Thursday, Friday, Saturday
@@ -79,7 +48,7 @@ function Book(){
                     <h1>Book appointment</h1>
                 </div>
             </div>
-            {!response && (
+            {!user && (
                 <>
                     <div className="d-flex flex-column justify-content-center align-items-center gap-5">
                         <div>
@@ -101,7 +70,7 @@ function Book(){
                 </>
             )}
 
-            {response && (
+            {user && (
                 <>
                     <div className="d-flex justify-content-center">
                         <Calendar
