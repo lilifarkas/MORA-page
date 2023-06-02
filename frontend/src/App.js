@@ -11,6 +11,7 @@ import Profile from "./components/Profile/Profile"
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Edit from "./components/Profile/EditProfile"
+import ChangePassword from "./components/Profile/ChangePassword"
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                         <Route path="/register" element={[ <Register />]} />
                         <Route path="/profile" element={[ <Profile />]} />
                         <Route path="/edit" element={[ <Edit />]} />
+                        <Route path="/change-password" element={[ <ChangePassword />]} />
                     </Routes>
             </Router>
         </>
