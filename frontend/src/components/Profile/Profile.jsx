@@ -16,6 +16,11 @@ function Profile(){
         navigate("/edit");
     };
 
+    const handleChangePassword = async (e) => {
+        e.preventDefault();
+        navigate("/change-password");
+    };
+
     const deleteUser = async (e) => {
         e.preventDefault();
         await fetch(`https://localhost:7230/users/delete/${user.id}`, {
@@ -52,7 +57,7 @@ function Profile(){
                         </NavLink>
                     </div>
                     <h1>Profile</h1>
-                    <div className="d-flex flex-row main3 justify-content-center align-items-center">
+                    <div className="d-flex flex-row main3 justify-content-center align-items-center gap-5">
                         <div>
                             {user && <>
                                 <h1>Name: {user.name}</h1>
@@ -64,7 +69,7 @@ function Profile(){
                         <div className="buttons d-flex flex-column gap-3">
                             <button className="btn btn-primary profile-buttons" onClick={handleEditProfile}>EDIT PROFILE</button>
                             <button className="btn btn-primary profile-buttons" onClick={() => setShowModal(true)}>DELETE PROFILE</button>
-                            <button className="btn btn-primary profile-buttons">CHANGE PASSWORD</button>
+                            <button className="btn btn-primary profile-buttons" onClick={handleChangePassword}>CHANGE PASSWORD</button>
                             <button className="btn btn-primary profile-buttons">BOOK APPPOINTMENT</button>
                         </div>
                     </div>
