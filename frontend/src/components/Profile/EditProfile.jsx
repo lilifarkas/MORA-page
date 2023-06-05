@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
-import './EditProfile.css'
 import useFetchUser from "../../hooks/useFetchUser";
 import {FiArrowLeft} from "react-icons/fi";
 import bgImg from "../../images/Névtelen terv (28).png";
@@ -8,7 +7,7 @@ import bgImg from "../../images/Névtelen terv (28).png";
 function EditProfile( ) {
     const fetchUser = useFetchUser();
     const [user, setUser] = useState("");
-    const [change, setChange] = useState(false);
+    const [profileUpdated, setProfileUpdated] = useState(false);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -25,7 +24,7 @@ function EditProfile( ) {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
+        
         await fetch(`https://localhost:7230/users/update/${user.id}`, {
             method: "PUT",
             body: JSON.stringify(user),
@@ -34,8 +33,7 @@ function EditProfile( ) {
             },
             credentials: 'include'
         });
-        console.log(user);
-        setChange(true);
+        setProfileUpdated(true);
     };
 
     return (
@@ -52,47 +50,54 @@ function EditProfile( ) {
                             Back
                         </NavLink>
                         <h1>Edit Profile</h1>
-                        {change && <>
-                            <div>Profile updated!</div>
-                        </>}
-                        {!change && <>
+                        {profileUpdated ? (
+                            <div className="text-white fs-4">Profile updated!</div>
+                        ) : (
                             <form onSubmit={onSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="name" className="titles mt-2">Username: </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="name"
-                                    value={user.name}
-                                    onChange={(e) => setUser({...user, name: e.target.value })}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="name" className="titles mt-2">Email: </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="email"
-                                    value={user.email}
-                                    onChange={(e) => setUser({...user, email: e.target.value })}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="name" className="titles mt-2">Phone Number: </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="password"
-                                    // value={user?.password&& "*".repeat(user.password.length)}
-                                    value={user.phone}
-                                    onChange={(e) => setUser({...user, phone: e.target.value })}
-                                />
-                            </div>
-                            <button type="submit" className="btn btn-primary">
-                                Save
-                            </button>
+                                <div className="form-group">
+                                    <label htmlFor="name" className="titles mt-2">
+                                        Username:
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="name"
+                                        value={user.name}
+                                        onChange={(e) => setUser({ ...user, name: e.target.value })}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="name" className="titles mt-2">
+                                        Email:
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="email"
+                                        value={user.email}
+                                        onChange={(e) => setUser({ ...user, email: e.target.value })}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="name" className="titles mt-2">
+                                        Phone Number:
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="password"
+                                        value={user.phone}
+                                        onChange={(e) =>
+                                            setUser({ ...user, phone: e.target.value })
+                                        }
+                                    />
+                                </div>
+                                <button type="submit" className="btn btn-primary">
+                                    Save
+                                </button>
                             </form>
-                        </>}
+                        )}
+                        
                     </div>
                 </div>
         </div>
