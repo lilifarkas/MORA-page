@@ -1,4 +1,5 @@
 using backend.Models.Entities;
+using backend.Models.Requests;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services;
@@ -57,7 +58,22 @@ public class UserService: IUserService
         }
         else
         {
-            throw new InvalidOperationException("User not found."); // Or handle the case when the user is not found.
+            throw new InvalidOperationException("User not found.");
+        }
+    }
+
+    public async Task ChangePassword(long id, ChangePasswordRequest changePasswordRequest)
+    {
+        var user = await _context.Users.FirstAsync(t => t.ID == id);
+        
+        if (user != null)
+        {
+            user.Password = changePasswordRequest.NewPassword;
+            await _context.SaveChangesAsync();
+        }
+        else
+        {
+            throw new InvalidOperationException("User not found.");
         }
     }
 
