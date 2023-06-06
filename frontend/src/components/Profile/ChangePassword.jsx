@@ -15,6 +15,7 @@ function ChangePass( ) {
     const [isMatching, setIsMatching] = useState(true);
     const [isFormFilled, setIsFormFilled] = useState(false);
     const navigate = useNavigate();
+    const [failedOldPass, setFailedOldPass] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,7 +33,7 @@ function ChangePass( ) {
     const onSubmit = async (e) => {
         e.preventDefault();
         
-        await fetch(`https://localhost:7230/change-pass/${user.id}`, {
+        const result = await fetch(`https://localhost:7230/change-pass/${user.id}`, {
             method: "PUT",
             body: JSON.stringify(changePassForm),
             headers: {
@@ -40,31 +41,40 @@ function ChangePass( ) {
             },
             credentials: 'include'
         });
-        console.log(changePassForm);
-
-        const response = await fetch('https://localhost:7230/logout',{
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-        });
-
-        if (!response.ok) {
-            const errorResponse = await response.json();
-            const errorMessage = errorResponse.errorMessages[0];
-            alert(errorMessage);
-            console.log(errorMessage);
+        if (!result.ok) {
+            const errorResponse = await result.json();
+            setFailedOldPass(true);
+            console.log(failedOldPass)
             return;
         }
 
-        if(response.ok){
-            navigate("/login");
+        if(result.ok){
+            const response = await fetch('https://localhost:7230/logout',{
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+            });
+
+            if (!response.ok) {
+                const errorResponse = await response.json();
+                const errorMessage = errorResponse.errorMessages[0];
+                alert(errorMessage);
+                console.log(errorMessage);
+                return;
+            }
+
+            if(response.ok){
+                navigate("/login");
+            }
+            setTimeout(() => {
+
+            }, 1000);
         }
         setTimeout(() => {
 
         }, 1000);
-        
     };
     
     const checkNewPass = (e) => {
@@ -84,7 +94,6 @@ function ChangePass( ) {
         setIsFormFilled(
             Object.values(changePassForm).every((value) => value.trim() !== '')
         );
-        console.log(changePassForm)
     };
 
     return (
@@ -136,6 +145,9 @@ function ChangePass( ) {
                             </div>
                             {!isMatching && <>
                                 <p className="text-danger">Match the new password!</p>
+                            </>}
+                            {failedOldPass && <>
+                                <p className="text-danger">Wrong password!</p>
                             </>}
                             <button type="submit" className="btn btn-primary" disabled={!isMatching|| !isFormFilled}>
                                 Save 
