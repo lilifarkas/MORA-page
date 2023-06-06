@@ -14,6 +14,7 @@ function ChangePass( ) {
     })
     const [isMatching, setIsMatching] = useState(true);
     const [isFormFilled, setIsFormFilled] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,15 +32,38 @@ function ChangePass( ) {
     const onSubmit = async (e) => {
         e.preventDefault();
         
-        // await fetch(`https://localhost:7230/users/update/${user.id}`, {
-        //     method: "PUT",
-        //     body: JSON.stringify(user),
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     credentials: 'include'
-        // });
+        await fetch(`https://localhost:7230/change-pass/${user.id}`, {
+            method: "PUT",
+            body: JSON.stringify(changePassForm),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+        });
         console.log(changePassForm);
+
+        const response = await fetch('https://localhost:7230/logout',{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        });
+
+        if (!response.ok) {
+            const errorResponse = await response.json();
+            const errorMessage = errorResponse.errorMessages[0];
+            alert(errorMessage);
+            console.log(errorMessage);
+            return;
+        }
+
+        if(response.ok){
+            navigate("/login");
+        }
+        setTimeout(() => {
+
+        }, 1000);
         
     };
     
