@@ -1,5 +1,6 @@
 using backend.Models.Entities;
 using backend.Models.Requests;
+using backend.Services.PasswordHasher;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services;
@@ -7,10 +8,12 @@ namespace backend.Services;
 public class UserService: IUserService
 {
     private readonly MedicalContext _context;
+    private readonly IPasswordHasher _passwordHasher;
 
-    public UserService(MedicalContext context)
+    public UserService(MedicalContext context, IPasswordHasher passwordHasher)
     {
         _context = context;
+        _passwordHasher = passwordHasher;
     }
     public async Task<User> Add(User user)
     {
@@ -68,7 +71,8 @@ public class UserService: IUserService
         
         if (user != null)
         {
-            user.Password = changePasswordRequest.NewPassword;
+            var passwordHash = _passwordHasher.HashPassword(changePasswordRequest.NewPassword);
+            user.Password = passwordHash;
             await _context.SaveChangesAsync();
         }
         else
