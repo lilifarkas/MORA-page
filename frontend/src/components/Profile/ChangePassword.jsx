@@ -8,6 +8,12 @@ function ChangePass( ) {
     const fetchUser = useFetchUser();
     const [user, setUser] = useState("");
     const [change, setChange] = useState(false);
+    const[changePassForm, setChangePassForm] = useState({
+        "password": "",
+        "newPassword": ""
+    })
+    const [isMatching, setIsMatching] = useState(true);
+    const [isFormFilled, setIsFormFilled] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,18 +30,37 @@ function ChangePass( ) {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        setChange(true);
-        await fetch(`https://localhost:7230/users/update/${user.id}`, {
-            method: "PUT",
-            body: JSON.stringify(user),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include'
-        });
-        console.log(user);
+        
+        // await fetch(`https://localhost:7230/users/update/${user.id}`, {
+        //     method: "PUT",
+        //     body: JSON.stringify(user),
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     credentials: 'include'
+        // });
+        console.log(changePassForm);
+        
+    };
+    
+    const checkNewPass = (e) => {
+        if(e !== changePassForm.newPassword){
+            setIsMatching(false);
+        } else {
+            setIsMatching(true);
+        }
+    }
 
-        console.log(change);
+    const handleInputChange = (inputName, inputValue) => {
+        setChangePassForm((prevState) => ({
+            ...prevState,
+            [inputName]: inputValue,
+        }));
+
+        setIsFormFilled(
+            Object.values(changePassForm).every((value) => value.trim() !== '')
+        );
+        console.log(changePassForm)
     };
 
     return (
@@ -52,6 +77,7 @@ function ChangePass( ) {
                         Back
                     </NavLink>
                     <h1>Change Password</h1>
+                    <h5 className="text-white">After changing your password, you have to log in!</h5> 
                     {change && <>
                         <div>Profile updated!</div>
                     </>}
@@ -63,7 +89,7 @@ function ChangePass( ) {
                                     type="text"
                                     className="form-control"
                                     id="old-password"
-                                    onChange={(e) => setUser({...user, name: e.target.value })}
+                                    onChange={(e) => handleInputChange('password', e.target.value)}
                                 />
                             </div>
                             <div className="form-group">
@@ -72,7 +98,7 @@ function ChangePass( ) {
                                     type="text"
                                     className="form-control"
                                     id="new-password"
-                                    onChange={(e) => setUser({...user, password: e.target.value })}
+                                    onChange={(e) => handleInputChange('newPassword', e.target.value)}
                                 />
                             </div>
                             <div className="form-group">
@@ -81,10 +107,13 @@ function ChangePass( ) {
                                     type="text"
                                     className="form-control"
                                     id="new-password-again"
-                                    onChange={(e) => setUser({...user, phone: e.target.value })}
+                                    onChange={(e) => checkNewPass(e.target.value)}
                                 />
                             </div>
-                            <button type="submit" className="btn btn-primary">
+                            {!isMatching && <>
+                                <p className="text-danger">Match the new password!</p>
+                            </>}
+                            <button type="submit" className="btn btn-primary" disabled={!isMatching|| !isFormFilled}>
                                 Save 
                             </button>
                         </form>
