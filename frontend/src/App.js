@@ -12,6 +12,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Edit from "./components/Profile/EditProfile"
 import ChangePassword from "./components/Profile/ChangePassword"
+import Calendar from "./components/Calendar/Calendar"
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
                         <Route path="/profile" element={[ <Profile />]} />
                         <Route path="/edit" element={[ <Edit />]} />
                         <Route path="/change-password" element={[ <ChangePassword />]} />
+                        <Route path="/booking" element={[ <Calendar />]} />
                     </Routes>
             </Router>
         </>
