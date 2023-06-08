@@ -17,17 +17,15 @@
     color: #fff;
 }
 
-.back-button{
-    
-}
-
-.modalDelete{
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 50%;
     height: auto;
-    margin: auto;
     border-radius: 10px;
     padding: 20px;
-    margin-top: 10%;
     backdrop-filter: blur(200px);
     display: flex;
     flex-direction: column;
@@ -36,4 +34,10 @@
     gap: 10px;
     background-color: rgba(203, 170, 119, 0.65);
     color: white;
+}
+
+.no-bullets {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
