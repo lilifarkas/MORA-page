@@ -34,10 +34,10 @@ public class DateController: ControllerBase
         var registrationDate = new BookedDate()
         {
             User = registerDateRequest.User,
-            Date = registerDateRequest.Date,
-            BookedTime = registerDateRequest.BookedTime
+            Date = DateTime.Parse(registerDateRequest.Date),
+            BookedTime = DateTime.Parse(registerDateRequest.BookedTime),
         };
-
+        Console.WriteLine(registrationDate.BookedTime);
         var response = await _service.Add(registrationDate);
         return Ok(response);
     }
