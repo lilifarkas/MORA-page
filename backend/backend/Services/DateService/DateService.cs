@@ -13,9 +13,19 @@ public class DateService: IDateService
     }
     public async Task<BookedDate> Add(BookedDate date)
     {
-        _context.BookedDates.Add(date);
-
-        await _context.SaveChangesAsync();
+        var user = await _context.Users.FirstAsync(t => t.ID == date.User.ID);
+        if (user != null)
+        {
+            user.BookedDates.Add(date);
+            await _context.SaveChangesAsync();
+        }
+        else
+        {
+            throw new InvalidOperationException("User not found.");
+        }
+        // _context.BookedDates.Add(date);
+        //
+        // await _context.SaveChangesAsync();
 
         return await _context.BookedDates
             .Where(p => p.ID == date.ID)
