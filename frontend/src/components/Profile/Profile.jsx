@@ -62,7 +62,15 @@ function Profile(){
                                 <h1>Name: {user.name}</h1>
                                 <h1>Email: {user.email}</h1>
                                 <h1>Phone Number: {user.phone}</h1>
-                                <h1>Booked dates: {user.bookedDates}</h1>
+                                <h1>Booked dates: </h1>
+                                <ul className="no-bullets">
+                                    {user.bookedDates.map((booking, index) => (
+                                        <li key={index} className="text-white">
+                                            {new Date(booking.bookedTime).toLocaleDateString()}{' '}
+                                            {new Date(booking.bookedTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                        </li>
+                                    ))}
+                                </ul>
                             </>}
                         </div>
                         <div className="buttons d-flex flex-column gap-3">
@@ -79,7 +87,7 @@ function Profile(){
                         isOpen={showModal}
                         onRequestClose={() => setShowModal(false)}
                         contentLabel="Delete Profile Modal"
-                        className="modalDelete"
+                        className="modal"
                     >
                         <h2 className="titles">Are you sure you want to delete your profile?</h2>
                         <div className="d-flex flex-row gap-5 mt-3">
