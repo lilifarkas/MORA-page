@@ -40,7 +40,6 @@ function Profile(){
         setShowModal(false);
     }
 
-
     return (
         <div className="main3">
             <div className="main2">
@@ -70,7 +69,9 @@ function Profile(){
                             <button className="btn btn-primary profile-buttons" onClick={handleEditProfile}>EDIT PROFILE</button>
                             <button className="btn btn-primary profile-buttons" onClick={() => setShowModal(true)}>DELETE PROFILE</button>
                             <button className="btn btn-primary profile-buttons" onClick={handleChangePassword}>CHANGE PASSWORD</button>
-                            <button className="btn btn-primary profile-buttons">BOOK APPPOINTMENT</button>
+                            <a href="/booking" className="btn btn-primary profile-buttons">
+                                BOOK APPOINTMENT
+                            </a>
                         </div>
                     </div>
 
