@@ -22,10 +22,11 @@ function EditProfile( ) {
         fetchData();
     }, [fetchUser]);
 
+    console.log(user.bookedDates)
     const onSubmit = async (e) => {
         e.preventDefault();
         
-        await fetch(`https://localhost:7230/users/update/${user.id}`, {
+        const response = await fetch(`https://localhost:7230/users/update/${user.id}`, {
             method: "PUT",
             body: JSON.stringify(user),
             headers: {
@@ -33,7 +34,16 @@ function EditProfile( ) {
             },
             credentials: 'include'
         });
+        
+        if (!response.ok) {
+            const errorResponse = await response.json();
+            // const errorMessage = errorResponse.errorMessages[0];
+            alert(errorResponse)
+            console.log(errorResponse);
+            return
+        }
         setProfileUpdated(true);
+       
     };
 
     return (
