@@ -1,6 +1,6 @@
 <h1 align="center"> Health Center Page and Booking System (Under development) </h1>
 
-<h4 align="center">Welcome to the Health Center Page repository! <br> This project is an ongoing application designed for a health center. It features a React frontend and a C# backend utilizing Entity Framework for database management, with MS SQL as the chosen database technology. Authentication and authorization are implemented using JWT tokens. The main functionality of the application is the appointment booking system, which allows users to schedule appointments with doctors, view their upcoming appointments, and cancel booked appointments if necessary. <br><br><br>
+<h4 align="center">Welcome to the Health Center Page repository! <br><br> This project is an ongoing application designed for a health center. It features a React frontend and a C# backend utilizing Entity Framework for database management, with MS SQL as the chosen database technology. Authentication and authorization are implemented using JWT tokens. The main functionality of the application is the appointment booking system, which allows users to schedule appointments with doctors, view their upcoming appointments, and cancel booked appointments if necessary. <br><br><br>
 
 
 # Features & Technologies
