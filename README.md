@@ -1,5 +1,7 @@
-# Health Center Page
-Welcome to the Health Center Page repository! This project is an ongoing application designed for a health center. It features a React frontend and a C# backend utilizing Entity Framework for database management, with MS SQL as the chosen database technology. Authentication and authorization are implemented using JWT tokens. The main functionality of the application is the appointment booking system, which allows users to schedule appointments with doctors, view their upcoming appointments, and cancel booked appointments if necessary.
+<h1 align="center"> Health Center Page and Booking System (Under development) </h1>
+
+<h4 align="center">Welcome to the Health Center Page repository! This project is an ongoing application designed for a health center. It features a React frontend and a C# backend utilizing Entity Framework for database management, with MS SQL as the chosen database technology. Authentication and authorization are implemented using JWT tokens. The main functionality of the application is the appointment booking system, which allows users to schedule appointments with doctors, view their upcoming appointments, and cancel booked appointments if necessary. <br><br><br>
+
 
 # Features & Technologies
 Appointment Booking System: The core feature of the application is the appointment booking system. Users can schedule appointments with doctors, view their upcoming appointments, and cancel booked appointments if necessary. This functionality provides convenience and ease of use for both users and health center staff.
@@ -18,16 +20,21 @@ To get started with the Health Center Page application, follow the instructions 
 Clone the repository
 
 
-Install the required dependencies for the frontend by navigating to the frontend directory and running npm install.
-
+Install the required dependencies for the frontend by navigating to the frontend directory and running:
+```powershell
+npm install
 
 Set up the backend by navigating to the backend directory and configuring the connection string in the appsettings.json file with your MS SQL database credentials.
 
 
-Run the backend application by executing the command dotnet run in the backend directory.
+Run the backend application by executing this command in the backend directory:
+```powershell
+dotnet run
 
 
-Run the frontend application by executing the command npm start in the frontend directory.
+Run the frontend application by executing this command npm start in the frontend directory:
+```powershell
+npm start
 
 
 Access the application by opening a web browser and navigating to http://localhost:3000.
