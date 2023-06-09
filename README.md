@@ -23,18 +23,18 @@ Clone the repository
 Install the required dependencies for the frontend by navigating to the frontend directory and running:
 ```powershell
 npm install
-
+```
 Set up the backend by navigating to the backend directory and configuring the connection string in the appsettings.json file with your MS SQL database credentials.
 
 
 Run the backend application by executing this command in the backend directory:
 ```powershell
 dotnet run
-
+```
 
 Run the frontend application by executing this command npm start in the frontend directory:
 ```powershell
 npm start
-
+```
 
 Access the application by opening a web browser and navigating to http://localhost:3000.
