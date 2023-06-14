@@ -8,6 +8,11 @@ function EditProfile( ) {
     const fetchUser = useFetchUser();
     const [user, setUser] = useState("");
     const [profileUpdated, setProfileUpdated] = useState(false);
+    const[editUserForm, setEditUserForm] = useState({
+        "name": "",
+        "email": "",
+        "phone": ""
+    })
     
     useEffect(() => {
         const fetchData = async () => {
@@ -22,13 +27,13 @@ function EditProfile( ) {
         fetchData();
     }, [fetchUser]);
 
-    console.log(user.bookedDates)
+   
     const onSubmit = async (e) => {
         e.preventDefault();
         
         const response = await fetch(`https://localhost:7230/users/update/${user.id}`, {
             method: "PUT",
-            body: JSON.stringify(user),
+            body: JSON.stringify(editUserForm),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -72,8 +77,8 @@ function EditProfile( ) {
                                         type="text"
                                         className="form-control"
                                         id="name"
-                                        value={user.name}
-                                        onChange={(e) => setUser({ ...user, name: e.target.value })}
+                                        // value={user.name}
+                                        onChange={(e) => setEditUserForm({ ...editUserForm, name: e.target.value })}
                                     />
                                 </div>
                                 <div className="form-group">
@@ -84,8 +89,8 @@ function EditProfile( ) {
                                         type="text"
                                         className="form-control"
                                         id="email"
-                                        value={user.email}
-                                        onChange={(e) => setUser({ ...user, email: e.target.value })}
+                                        // value={user.email}
+                                        onChange={(e) =>  setEditUserForm({ ...editUserForm, email: e.target.value })}
                                     />
                                 </div>
                                 <div className="form-group">
@@ -96,10 +101,9 @@ function EditProfile( ) {
                                         type="text"
                                         className="form-control"
                                         id="password"
-                                        value={user.phone}
+                                        // value={user.phone}
                                         onChange={(e) =>
-                                            setUser({ ...user, phone: e.target.value })
-                                        }
+                                            setEditUserForm({ ...editUserForm, phone: e.target.value })}
                                     />
                                 </div>
                                 <button type="submit" className="btn btn-primary">
