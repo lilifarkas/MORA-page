@@ -4,15 +4,15 @@
 
 
 # Features & Technologies
-Appointment Booking System: The core feature of the application is the appointment booking system. Users can schedule appointments with doctors, view their upcoming appointments, and cancel booked appointments if necessary. This functionality provides convenience and ease of use for both users and health center staff.
+<u>Appointment Booking System:</u> The core feature of the application is the appointment booking system. Users can schedule appointments with doctors, view their upcoming appointments, and cancel booked appointments if necessary. This functionality provides convenience and ease of use for both users and health center staff.
 
-React Frontend: The frontend of the application is developed using **React**, a popular JavaScript library for building user interfaces. React enables a smooth and intuitive user experience, ensuring a seamless interaction with the application's features.
+<u>React Frontend:</u> The frontend of the application is developed using **React**, a popular JavaScript library for building user interfaces. React enables a smooth and intuitive user experience, ensuring a seamless interaction with the application's features.
 
-C# Backend with Entity Framework: The backend of the application is built using **C#**, leveraging the capabilities of **Entity Framework** for efficient database management and interaction. This combination allows for seamless integration between the frontend and the database.
+<u>C# Backend with Entity Framework:</u> The backend of the application is built using **C#**, leveraging the capabilities of **Entity Framework** for efficient database management and interaction. This combination allows for seamless integration between the frontend and the database.
 
-MS SQL Database: The application employs **MS SQL** as the database technology. MS SQL provides a robust and scalable solution for storing and retrieving appointment-related data, ensuring data integrity and security.
+<u>MS SQL Database:</u> The application employs **MS SQL** as the database technology. MS SQL provides a robust and scalable solution for storing and retrieving appointment-related data, ensuring data integrity and security.
 
-Authentication and Authorization: **JWT tokens** are utilized for secure authentication and authorization. This ensures that only authenticated users can access the appointment booking system and perform relevant actions, maintaining data privacy and security.
+<u>Authentication and Authorization:</u> **JWT tokens** are utilized for secure authentication and authorization. This ensures that only authenticated users can access the appointment booking system and perform relevant actions, maintaining data privacy and security.
 
 # Getting Started
 To get started with the Health Center Page application, follow the instructions below:
