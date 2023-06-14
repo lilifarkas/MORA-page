@@ -19,7 +19,7 @@ function Book(){
                 </div>
             </div>
             <div className="main-booking-text d-flex flex-row justify-content-center align-items-center">
-                <div className="d-flex flex-column w-50 mt-5 mb-5 gap-5">
+                <div className="d-flex flex-column w-25 gap-5">
                     <div className="booking-text text-center">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -34,7 +34,7 @@ function Book(){
                     </div>
                 </div>
                 <div>
-                    <img src={bookingImg} alt="doctor with his family" className="booking-pic mt-5 mb-5"/>
+                    <img src={bookingImg} alt="doctor with his family" className="booking-pic"/>
                 </div>
             </div>
             
