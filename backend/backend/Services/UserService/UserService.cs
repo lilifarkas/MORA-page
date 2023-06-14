@@ -28,7 +28,9 @@ public class UserService: IUserService
 
     public async Task<User> GetById(long id)
     {
-        return await _context.Users.FirstOrDefaultAsync(t => t.ID == id);
+        return await _context.Users
+            .Include(u => u.BookedDates)
+            .FirstOrDefaultAsync(t => t.ID == id);
     }
     
     public async Task<User> GetByEmail(string email)
@@ -46,17 +48,14 @@ public class UserService: IUserService
         return await _context.Users.ToListAsync();
     }
 
-    public async Task Update(User entity, long id)
+    public async Task Update(User user, EditUserRequest editUser)
     {
-        var user = await _context.Users.FirstAsync(t => t.ID == id);
-    
         if (user != null)
         {
             //_context.Entry(user).CurrentValues.SetValues(entity);
-            user.Name = entity.Name;
-            user.Email = entity.Email;
-            user.Phone = entity.Phone;
-            user.Password = entity.Password;
+            user.Name = editUser.Name;
+            user.Email = editUser.Email;
+            user.Phone = editUser.Phone;
             await _context.SaveChangesAsync();
         }
         else

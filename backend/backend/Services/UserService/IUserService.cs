@@ -10,7 +10,7 @@ public interface IUserService
     public Task<User> GetByName(string name);
     public Task<User> GetByEmail(string email);
     public Task<IEnumerable<User>> GetAll();
-    public Task Update(User entity, long id);
+    public Task Update(User user, EditUserRequest editUser);
     public Task ChangePassword(long id, ChangePasswordRequest changePasswordRequest);
     public Task Delete(long id);
 }
