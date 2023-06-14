@@ -4,7 +4,7 @@
 
 
 # Features & Technologies
-<u>Appointment Booking System:</u> The core feature of the application is the appointment booking system. Users can schedule appointments with doctors, view their upcoming appointments, and cancel booked appointments if necessary. This functionality provides convenience and ease of use for both users and health center staff.
+<span style="color:blue;">Appointment Booking System:</span> The core feature of the application is the appointment booking system. Users can schedule appointments with doctors, view their upcoming appointments, and cancel booked appointments if necessary. This functionality provides convenience and ease of use for both users and health center staff.
 
 <u>React Frontend:</u> The frontend of the application is developed using **React**, a popular JavaScript library for building user interfaces. React enables a smooth and intuitive user experience, ensuring a seamless interaction with the application's features.
 
