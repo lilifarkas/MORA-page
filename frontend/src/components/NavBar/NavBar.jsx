@@ -1,46 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBar.css';
-import pic from "./1660149889759865_page-0001-removebg-preview.png"
+import pic from "../../images/1660149889759865_page-0001-removebg-preview.png"
 import { Link } from "react-scroll";
 import {NavLink, useNavigate} from "react-router-dom";
-import {useState, useEffect} from "react";
 import { FiLogOut } from 'react-icons/fi';
+import useFetchUser from '../../hooks/useFetchUser';
 
 function NavBar(){
-    const [response, setResponse] = useState(false);
-    const [name, setName] = useState("");
-    const url = "https://localhost:7230/get-user";
+    const user = useFetchUser();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        async function getUser() {
-            const response = await fetch(url, {
-                method : 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-            });
-            if (response.ok) {
-                const result = await response.json();
-                setName(result.name.toString());
-                return true;
-            }else{
-                const errorResponse = await response.json();
-                alert(errorResponse)
-                console.log(errorResponse);
-                return false;
-            }
-        }
-
-        getUser().then(result => {
-            setResponse(result);
-        }).catch(error => {
-            console.error(error);
-        });
-
-        return;
-    }, []);
     
     const handleLogout = async (e) => {
         e.preventDefault();
@@ -62,7 +30,6 @@ function NavBar(){
         }
 
         if(response.ok){
-            setResponse(false);
             alert("User logged out");
             navigate("/");
         }
@@ -83,10 +50,10 @@ function NavBar(){
                             alt="Logo"
                         />
                     </a>
-                    {response && 
+                    {user && 
                         <>
                             <p className="name">
-                                Hello {name}
+                                Hello {user.name}
                             </p>
                             <button className="logout" onClick={handleLogout}>
                                 <FiLogOut />
@@ -154,27 +121,32 @@ function NavBar(){
                                     <p className="nav-title">Contact</p>
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <NavLink
-                                    to="/login"
-                                    offset={-70}
-                                    duration={200}
-                                    className="nav-link"
-                                >
-                                    Sign In
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink
-                                    to="/register"
-                                    offset={-70}
-                                    duration={200}
-                                    className="nav-link"
-                                >
-                                    Sign Up
-                                </NavLink>
-                            </li>
-                            {response &&
+                            {!user &&
+                                <>
+                                    <li className="nav-item">
+                                        <NavLink
+                                            to="/login"
+                                            offset={-70}
+                                            duration={200}
+                                            className="nav-link"
+                                        >
+                                            Sign In
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink
+                                            to="/register"
+                                            offset={-70}
+                                            duration={200}
+                                            className="nav-link"
+                                        >
+                                            Sign Up
+                                        </NavLink>
+                                    </li>
+                                </>
+                            }
+                            
+                            {user &&
                                 <li className="nav-item">
                                     <NavLink
                                         to="/profile"

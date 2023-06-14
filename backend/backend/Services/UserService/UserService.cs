@@ -1,4 +1,6 @@
 using backend.Models.Entities;
+using backend.Models.Requests;
+using backend.Services.PasswordHasher;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services;
@@ -6,10 +8,12 @@ namespace backend.Services;
 public class UserService: IUserService
 {
     private readonly MedicalContext _context;
+    private readonly IPasswordHasher _passwordHasher;
 
-    public UserService(MedicalContext context)
+    public UserService(MedicalContext context, IPasswordHasher passwordHasher)
     {
         _context = context;
+        _passwordHasher = passwordHasher;
     }
     public async Task<User> Add(User user)
     {
@@ -24,7 +28,9 @@ public class UserService: IUserService
 
     public async Task<User> GetById(long id)
     {
-        return await _context.Users.FirstOrDefaultAsync(t => t.ID == id);
+        return await _context.Users
+            .Include(u => u.BookedDates)
+            .FirstOrDefaultAsync(t => t.ID == id);
     }
     
     public async Task<User> GetByEmail(string email)
@@ -42,22 +48,35 @@ public class UserService: IUserService
         return await _context.Users.ToListAsync();
     }
 
-    public async Task Update(User entity, long id)
+    public async Task Update(User user, EditUserRequest editUser)
     {
-        var user = await _context.Users.FirstAsync(t => t.ID == id);
-    
         if (user != null)
         {
             //_context.Entry(user).CurrentValues.SetValues(entity);
-            user.Name = entity.Name;
-            user.Email = entity.Email;
-            user.Phone = entity.Phone;
-            user.Password = entity.Password;
+            user.Name = editUser.Name;
+            user.Email = editUser.Email;
+            user.Phone = editUser.Phone;
             await _context.SaveChangesAsync();
         }
         else
         {
-            throw new InvalidOperationException("User not found."); // Or handle the case when the user is not found.
+            throw new InvalidOperationException("User not found.");
+        }
+    }
+
+    public async Task ChangePassword(long id, ChangePasswordRequest changePasswordRequest)
+    {
+        var user = await _context.Users.FirstAsync(t => t.ID == id);
+        
+        if (user != null)
+        {
+            var passwordHash = _passwordHasher.HashPassword(changePasswordRequest.NewPassword);
+            user.Password = passwordHash;
+            await _context.SaveChangesAsync();
+        }
+        else
+        {
+            throw new InvalidOperationException("User not found.");
         }
     }
 

@@ -121,7 +121,7 @@ public class AuthController : ControllerBase
         HttpContext.Response.Cookies.Append("X-Refresh-Token", response.RefreshToken,
             new CookieOptions
             {
-                Expires = DateTime.Now.AddMinutes(15),
+                Expires = DateTime.Now.AddMinutes(300000),
                 HttpOnly = true,
                 Secure = true,
                 IsEssential = true,
@@ -132,7 +132,7 @@ public class AuthController : ControllerBase
         HttpContext.Response.Cookies.Append("X-Access-Token", response.AccessToken,
             new CookieOptions
             {
-                Expires = DateTime.Now.AddMinutes(15),
+                Expires = DateTime.Now.AddMinutes(60),
                 HttpOnly = true,
                 Secure = true,
                 IsEssential = true,
@@ -143,7 +143,7 @@ public class AuthController : ControllerBase
         Response.Cookies.Append("X-UserId", user.ID.ToString(),
             new CookieOptions
             {
-                Expires = DateTime.Now.AddMinutes(15),
+                Expires = DateTime.Now.AddMinutes(60),
                 HttpOnly = true,
                 Secure = true,
                 IsEssential = true,

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './Contact.css';
-import bgImg from "./Névtelen terv (20).png";
+import bgImg from "../../images/Névtelen terv (20).png";
 import emailjs from 'emailjs-com';
 
 function Contact() {

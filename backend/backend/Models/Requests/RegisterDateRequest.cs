@@ -8,7 +8,7 @@ public class RegisterDateRequest
     [Required]
     public User User { get; set; }
     [Required]
-    public DateTime Date { get; set; }
+    public string Date { get; set; }
     [Required]
-    public DateTime BookedTime { get; set; }
+    public string BookedTime { get; set; }
 }

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhoneAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import './Header.css';
 import { Link } from "react-scroll";
-
+import {NavLink, useNavigate} from "react-router-dom";
 function Header(){
     
     
@@ -15,9 +15,9 @@ function Header(){
                         <div className="">
                             <h1 className="">Prevention and Rehabilitation Center</h1>
                             <a className="btn btn-primary" href="#" role="button">
-                                <Link
+                                <NavLink
                                     activeClass="active"
-                                    to="appointment"
+                                    to="/booking"
                                     spy={true}
                                     smooth={true}
                                     offset={-70}
@@ -25,7 +25,7 @@ function Header(){
                                     className="nav-link ctaButton"
                                 >
                                     Book appointment
-                                </Link>
+                                </NavLink>
                             </a>
                         </div>
                     </div>
