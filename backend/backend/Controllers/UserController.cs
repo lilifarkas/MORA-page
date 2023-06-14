@@ -32,9 +32,17 @@ public class UserController: ControllerBase
     }
     
     [HttpPut("/users/update/{id}")]
-    public async Task UpdateUser(long id, [FromBody] User user)
+    public async Task<IActionResult> UpdateUser(long id, [FromBody] EditUserRequest editUser)
     {
-        await _service.Update(user, id);
+        var user = _service.GetById(id);
+        
+        if (user == null)
+        {
+            return Unauthorized();
+        }
+        
+        await _service.Update(user.Result, editUser);
+        return Ok();
     }
     
     [HttpPut("/change-pass/{id}")]
