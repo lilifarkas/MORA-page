@@ -36,5 +36,5 @@ jobs:
           dotnet-version: '6.x'
       - name: Build and test backend
         run:  |
-          cd /home/runner/work/health-center-page/health-center-page/backend
+          cd /home/runner/work/health-center-page/health-center-page/backend/backend
           dotnet build
