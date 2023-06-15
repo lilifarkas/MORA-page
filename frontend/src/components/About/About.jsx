@@ -5,6 +5,7 @@ import missionImg from '../../images/Névtelen terv (24).png';
 import { useTrail, a } from '@react-spring/web'
 import styles from './styles.module.css'
 import React, { useState, useRef, useEffect } from 'react';
+import { useSpring, animated, config } from 'react-spring';
 
 const Trail = ({ open, children }) => {
     const items = React.Children.toArray(children);
@@ -54,6 +55,50 @@ const Trail = ({ open, children }) => {
     );
 };
 
+const FadeIn = ({ children }) => {
+    const ref = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setIsVisible(true);
+                    } else {
+                        setIsVisible(false);
+                    }
+                });
+            },
+            { threshold: 0 }
+        );
+
+        if (ref.current) {
+            observer.observe(ref.current);
+        }
+
+        return () => {
+            if (ref.current) {
+                observer.unobserve(ref.current);
+            }
+        };
+    }, []);
+
+    const fadeAnimation = useSpring({
+        opacity: isVisible ? 1 : 0,
+        from: { opacity: 0 },
+        config: {
+            duration: 1000,
+        },
+    });
+
+    return (
+        <animated.div ref={ref} style={fadeAnimation}>
+            {children}
+        </animated.div>
+    );
+};
+
 
 function MainPage(){
     const [open, set] = useState(true)
@@ -100,23 +145,29 @@ function MainPage(){
                 <div className="mt-5 about2 d-flex justify-content-center">
                     <div className="">
                         <div className="service child d-flex flex-column justify-content-center align-items-center text-center">
-                            <h3>Experienced Staff</h3>
-                            <p>Our team of medical professionals has years of experience and is dedicated to providing 
-                                the highest quality care to our patients.</p>
+                            <FadeIn>
+                                <h3>Experienced Staff</h3>
+                                <p>Our team of medical professionals has years of experience and is dedicated to providing
+                                    the highest quality care to our patients.</p>
+                            </FadeIn>
                         </div>
                     </div>
                     <div className="">
                         <div className="service child d-flex flex-column justify-content-center align-items-center text-center">
-                            <h3>Convenient Appointments</h3>
-                            <p>We offer flexible scheduling options, so that you can get the care you need when it is 
-                                most convenient for you.</p>
+                            <FadeIn>
+                                <h3>Convenient Appointments</h3>
+                                <p>We offer flexible scheduling options, so that you can get the care you need when it is
+                                    most convenient for you.</p>
+                            </FadeIn>
                         </div>
                     </div>
                     <div className="">
                         <div className="service child d-flex flex-column justify-content-center align-items-center text-center">
-                            <h3>Compassionate Care</h3>
-                            <p>We treat every patient with the respect, dignity, and kindness they deserve. 
-                                You can trust us to provide the care you need.</p>
+                            <FadeIn>
+                                <h3>Compassionate Care</h3>
+                                <p>We treat every patient with the respect, dignity, and kindness they deserve.
+                                    You can trust us to provide the care you need.</p>
+                            </FadeIn>
                         </div>
                     </div>
                 </div>
