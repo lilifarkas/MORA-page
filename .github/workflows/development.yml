@@ -21,14 +21,14 @@ jobs:
           node-version: '14.x'
       - name: Install dependencies
         run: |
-          cd /home/runner/work/mental-health-journal/mental-health-journal/frontend
+          cd /home/runner/work/mora-page/frontend
           npm install
           npm ci
       - name: Print current working directory
         run: pwd
       - name: Run lint tests
         run: |
-          cd /home/runner/work/mental-health-journal/mental-health-journal/frontend
+          cd /home/runner/work/mora-page/frontend
           npm run lint
       - name: Setup .NET Core environment
         uses: actions/setup-dotnet@v1
@@ -36,5 +36,5 @@ jobs:
           dotnet-version: '6.x'
       - name: Build and test backend
         run:  |
-          cd /home/runner/work/mental-health-journal/mental-health-journal/Backend/MentalHealth
+          cd /home/runner/work/mora-page/backend/backend
           dotnet build
