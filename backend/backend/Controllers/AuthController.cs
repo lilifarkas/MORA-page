@@ -5,7 +5,6 @@ using backend.Models.Responses;
 using backend.Services;
 using backend.Services.Authenticator;
 using backend.Services.PasswordHasher;
-using backend.Services.RefreshTokenService;
 using backend.Services.TokenValidator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,15 +18,13 @@ public class AuthController : ControllerBase
     private readonly IPasswordHasher _passwordHasher;
     private readonly Authenticator _authenticator;
     private readonly RefreshTokenValidator _refreshTokenValidator;
-    private readonly IRefreshTokenService _refreshTokenService;
 
-    public AuthController(IUserService service, IPasswordHasher passwordHasher, Authenticator authenticator, RefreshTokenValidator refreshTokenValidator, IRefreshTokenService refreshTokenService )
+    public AuthController(IUserService service, IPasswordHasher passwordHasher, Authenticator authenticator, RefreshTokenValidator refreshTokenValidator)
     {
         _service = service;
         _passwordHasher = passwordHasher;
         _authenticator = authenticator;
         _refreshTokenValidator = refreshTokenValidator;
-        _refreshTokenService = refreshTokenService;
     }
 
     [HttpPost("register")]

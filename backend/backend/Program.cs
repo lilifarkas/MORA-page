@@ -5,7 +5,6 @@ using backend.Models;
 using backend.Services;
 using backend.Services.Authenticator;
 using backend.Services.PasswordHasher;
-using backend.Services.RefreshTokenService;
 using backend.Services.TokenGenerators;
 using backend.Services.TokenValidator;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -35,7 +34,6 @@ builder.Services.AddSingleton<AccessTokenGenerator>();
 builder.Services.AddSingleton<RefreshTokenGenerator>();
 builder.Services.AddSingleton<RefreshTokenValidator>();
 builder.Services.AddSingleton<Authenticator>();
-builder.Services.AddSingleton<IRefreshTokenService, InMemoryRefreshTokenService>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IDateService, DateService>();
