@@ -1,10 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhoneAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import './Header.css';
-import { Link } from "react-scroll";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import ButtonAnimation from '../Animation/ButtonAmination';
+
 function Header(){
-    
     
     return (
         
@@ -14,18 +12,21 @@ function Header(){
                     <div className="row">
                         <div className="">
                             <h1 className="">Prevention and Rehabilitation Center</h1>
+                            
                             <a className="btn btn-primary" href="#" role="button">
-                                <NavLink
-                                    activeClass="active"
-                                    to="/booking"
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-70}
-                                    duration={200}
-                                    className="nav-link ctaButton"
-                                >
-                                    Book appointment
-                                </NavLink>
+                                <ButtonAnimation>
+                                    <NavLink
+                                        activeClass="active"
+                                        to="/booking"
+                                        spy={true}
+                                        smooth={true}
+                                        offset={-70}
+                                        duration={200}
+                                        className="nav-link ctaButton"
+                                    >
+                                            Book appointment
+                                    </NavLink>
+                                </ButtonAnimation>
                             </a>
                         </div>
                     </div>
