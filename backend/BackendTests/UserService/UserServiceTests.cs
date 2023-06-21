@@ -216,6 +216,47 @@ public class Tests
             Assert.That(updatedUser.Phone, Is.EqualTo(editUser.Phone));
         }
 
+        // [Test]
+        // public async Task ChangePassword_ShouldChangeUserPassword()
+        // {
+        //     // Arrange
+        //     await using var context = new MedicalContext(_dbContextOptions);
+        //     var passwordHasherMock = new Mock<IPasswordHasher>();
+        //     var userService = new UserService(context, passwordHasherMock.Object);
+        //
+        //     long userId = 1L;
+        //     var user = new User
+        //     {
+        //         ID = userId,
+        //         Name = "Bela",
+        //         Email = "bela@bela.com",
+        //         Phone = "1234567",
+        //         BookedDates = new List<BookedDate>(),
+        //         Password = "test",
+        //         Role = ""
+        //     };
+        //
+        //     context.Users.Add(user);
+        //     await context.SaveChangesAsync();
+        //
+        //     var changePasswordRequest = new ChangePasswordRequest
+        //     {
+        //         NewPassword = "newpassword"
+        //     };
+        //
+        //     // Act
+        //     await userService.ChangePassword(userId, changePasswordRequest);
+        //
+        //     // Assert
+        //     var updatedUser = await context.Users.FindAsync(userId);
+        //     Assert.NotNull(updatedUser);
+        //     passwordHasherMock.Verify(
+        //         hasher => hasher.HashPassword(changePasswordRequest.NewPassword),
+        //         Times.Once);
+        //     Assert.That(
+        //         updatedUser.Password, Is.EqualTo(changePasswordRequest.NewPassword));
+        // }
+        
         [Test]
         public async Task ChangePassword_ShouldChangeUserPassword()
         {
@@ -224,7 +265,7 @@ public class Tests
             var passwordHasherMock = new Mock<IPasswordHasher>();
             var userService = new UserService(context, passwordHasherMock.Object);
 
-            var userId = 100002;
+            long userId = 1L;
             var user = new User
             {
                 ID = userId,
@@ -244,17 +285,18 @@ public class Tests
                 NewPassword = "newpassword"
             };
 
+            var expectedHashedPassword = "hashedPassword";
+            passwordHasherMock
+                .Setup(hasher => hasher.HashPassword(changePasswordRequest.NewPassword))
+                .Returns(expectedHashedPassword);
+
             // Act
             await userService.ChangePassword(userId, changePasswordRequest);
 
             // Assert
             var updatedUser = await context.Users.FindAsync(userId);
             Assert.NotNull(updatedUser);
-            passwordHasherMock.Verify(
-                hasher => hasher.HashPassword(changePasswordRequest.NewPassword),
-                Times.Once);
-            Assert.That(
-                updatedUser.Password, Is.EqualTo(changePasswordRequest.NewPassword));
+            Assert.AreEqual(expectedHashedPassword, updatedUser.Password);
         }
 
         [Test]
