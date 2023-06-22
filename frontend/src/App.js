@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Edit from "./components/Profile/EditProfile"
 import ChangePassword from "./components/Profile/ChangePassword"
 import Calendar from "./components/Calendar/Calendar"
+import FadeIn from "./components/Animation/FadeIn"
 
 function App() {
 
@@ -20,7 +21,22 @@ function App() {
         <>
             <Router>
                     <Routes>
-                        <Route path="/" element={[<NavBar/>, <Header />, <About/>, <Book/>, <Contact/>, <Footer/>]} />
+                        <Route path="/" element={[
+                            <NavBar />,
+                            <Header />,
+                            <FadeIn>
+                                <About />
+                            </FadeIn>,
+                            <FadeIn>
+                                <Book />
+                            </FadeIn>,
+                            <FadeIn>
+                                <Contact />
+                            </FadeIn>,
+                            <FadeIn>
+                                <Footer />
+                            </FadeIn>,
+                        ]} />
                         <Route path="/login" element={[ <LogIn />]} />
                         <Route path="/register" element={[ <Register />]} />
                         <Route path="/profile" element={[ <Profile />]} />

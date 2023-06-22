@@ -1,10 +1,10 @@
-import { Calendar } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Book.css'
 import bgImg from "../../images/Névtelen terv (23).png";
 import bookingImg from "../../images/Névtelen terv (35).png";
 import { NavLink } from "react-router-dom";
 import useFetchUser from '../../hooks/useFetchUser';
+import ButtonAnimation from "../Animation/ButtonAmination"
 
 function Book(){
     const user = useFetchUser();
@@ -47,14 +47,18 @@ function Book(){
                         </div>
                         <div className="d-flex flex-row gap-5 justify-content-center">
                             <NavLink className="button-text" to="/register">
-                                <button className="btn btn-primary">
-                                    SIGN UP
-                                </button>
+                                <ButtonAnimation>
+                                    <button className="btn btn-primary">
+                                        SIGN UP
+                                    </button>
+                                </ButtonAnimation>
                             </NavLink>
                             <NavLink className="button-text" to="/login">
-                                <button className="btn btn-primary">
-                                    SIGN IN
-                                </button>
+                                <ButtonAnimation>
+                                    <button className="btn btn-primary">
+                                        SIGN IN
+                                    </button>
+                                </ButtonAnimation>
                             </NavLink>
                         </div>
                     </div>
