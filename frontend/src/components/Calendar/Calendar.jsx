@@ -7,6 +7,7 @@ import { Calendar } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import "./Calendar.css"
 import Modal from "react-modal";
+import URL from '../../Constants/ConstantUrl';
 
 
 function CalendarToBook(){
@@ -107,7 +108,7 @@ function CalendarToBook(){
             "bookedTime": bookedTime.toISOString()
         };
         console.log(user.id)
-        const response = await fetch(`https://localhost:7230/dates/registerDate`, {
+        const response = await fetch(`${URL}dates/registerDate`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

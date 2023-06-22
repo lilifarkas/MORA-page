@@ -5,6 +5,7 @@ import { Link } from "react-scroll";
 import {NavLink, useNavigate} from "react-router-dom";
 import { FiLogOut } from 'react-icons/fi';
 import useFetchUser from '../../hooks/useFetchUser';
+import URL from '../../Constants/ConstantUrl';
 
 function NavBar(){
     const user = useFetchUser();
@@ -13,7 +14,7 @@ function NavBar(){
     const handleLogout = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('https://localhost:7230/logout',{
+        const response = await fetch(`${URL}logout`,{
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

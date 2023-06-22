@@ -3,6 +3,7 @@ import './Register.css';
 import bgImg from "../../images/register.png";
 import {NavLink, useNavigate} from "react-router-dom";
 import { FiArrowLeft } from 'react-icons/fi';
+import URL from '../../Constants/ConstantUrl';
 
 function Register() {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('https://localhost:7230/register',{
+        const response = await fetch(`${URL}register`,{
             method: 'POST',
             headers: {
                 // 'Authorization' : `Bearer ${localStorage.getItem("token")}`,

@@ -3,6 +3,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import useFetchUser from "../../hooks/useFetchUser";
 import {FiArrowLeft} from "react-icons/fi";
 import bgImg from "../../images/Névtelen terv (28).png";
+import URL from '../../Constants/ConstantUrl';
 
 function ChangePass( ) {
     const fetchUser = useFetchUser();
@@ -33,7 +34,7 @@ function ChangePass( ) {
     const onSubmit = async (e) => {
         e.preventDefault();
         
-        const result = await fetch(`https://localhost:7230/change-pass/${user.id}`, {
+        const result = await fetch(`${URL}change-pass/${user.id}`, {
             method: "PUT",
             body: JSON.stringify(changePassForm),
             headers: {
@@ -49,7 +50,7 @@ function ChangePass( ) {
         }
 
         if(result.ok){
-            const response = await fetch('https://localhost:7230/logout',{
+            const response = await fetch(`${URL}logout`,{
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

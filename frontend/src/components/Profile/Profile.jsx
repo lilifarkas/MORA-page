@@ -5,6 +5,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import { FiArrowLeft } from 'react-icons/fi';
 import useFetchUser from '../../hooks/useFetchUser';
 import Modal from 'react-modal';
+import URL from '../../Constants/ConstantUrl';
 
 function Profile(){
     const user = useFetchUser();
@@ -23,7 +24,7 @@ function Profile(){
 
     const deleteUser = async (e) => {
         e.preventDefault();
-        await fetch(`https://localhost:7230/users/delete/${user.id}`, {
+        await fetch(`${URL}users/delete/${user.id}`, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',

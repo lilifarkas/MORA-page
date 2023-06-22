@@ -3,6 +3,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import useFetchUser from "../../hooks/useFetchUser";
 import {FiArrowLeft} from "react-icons/fi";
 import bgImg from "../../images/Névtelen terv (28).png";
+import URL from '../../Constants/ConstantUrl';
 
 function EditProfile( ) {
     const fetchUser = useFetchUser();
@@ -31,7 +32,7 @@ function EditProfile( ) {
     const onSubmit = async (e) => {
         e.preventDefault();
         
-        const response = await fetch(`https://localhost:7230/users/update/${user.id}`, {
+        const response = await fetch(`${URL}users/update/${user.id}`, {
             method: "PUT",
             body: JSON.stringify(editUserForm),
             headers: {

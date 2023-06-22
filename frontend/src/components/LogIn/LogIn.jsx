@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import bgImg from "../../images/Névtelen terv (25).png";
 import {NavLink, useNavigate} from "react-router-dom";
 import { FiArrowLeft } from 'react-icons/fi';
+import URL from '../../Constants/ConstantUrl';
 
 function LogIn() {
     const[LogInForm, setLogInForm] = useState({
@@ -13,7 +14,7 @@ function LogIn() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('https://localhost:7230/login',{
+        const response = await fetch(`${URL}login`,{
             method: 'POST',
             headers: {
                 // 'Authorization' : `Bearer ${localStorage.getItem("token")}`,
