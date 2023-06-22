@@ -47,7 +47,8 @@ function Contact() {
                     setError('Failed to send email. Please try again later.');
                 });
         }
-    };
+    }
+    const isFormValid = name && email && message;
 
     return (
         <div className="main1" id="contact">
@@ -95,7 +96,7 @@ function Contact() {
                             ></textarea>
                         </div>
                         {success && <div className="success" style={{color: '#ffffff'}}>{success}</div>}
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="btn btn-primary" disabled={!isFormValid}>
                             Submit
                         </button>
                     </form>
