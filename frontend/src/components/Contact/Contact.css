@@ -44,3 +44,8 @@ textarea {
     margin-bottom: 10px;
 }
 
+.btn-primary:disabled {
+    background-color: rgb(74,100,111);
+    border-color: rgb(74,100,111);
+}
+
