@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
+import URL from '../Constants/ConstantUrl'
 
 function useFetchUser() {
     const [user, setUser] = useState("");
-    const url = "https://localhost:7230/get-user";
+    const url = `${URL}get-user`;
 
     useEffect(() => {
         async function getUser() {

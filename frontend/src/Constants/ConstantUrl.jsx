@@ -1,3 +1,3 @@
-const URL = 'https://localhost:7230/';
+const URL = 'https://localhost:5001/';
 
 export default URL;
