@@ -1,0 +1,51 @@
+.form-group {
+    margin-bottom: 1.5rem;
+    width: 500px;
+}
+
+label {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+input,
+textarea {
+    border-radius: 0;
+    border: none;
+    background-color: #f7f7f7;
+    padding: 1rem;
+    width: 100%;
+}
+
+.main1{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.hero2{
+    position: relative;
+    height: 700px;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.error{
+    color: #d70b0b;
+}
+
+.success{
+    width: 500px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.btn-primary:disabled {
+    background-color: rgb(74,100,111);
+    border-color: rgb(74,100,111);
+}
+
