@@ -1,18 +1,23 @@
 
-.text-to-book{
- color: rgb(74,100,111);
+.text-to-book {
+    color: rgb(74,100,111);
 }
 
 .booking-text{
     
-    color: white;
+    color: rgb(74,100,111);
 }
 
 .main-booking-text{
-    background-color: rgb(203,170,119);
+    background-color: white;
     gap: 5%;
 }
 
 .booking-pic{
-    width: 800px;
+    width: 600px;
+}
+
+.book-part{
+    background-color: white;
+    padding-bottom: 20px;
 }
