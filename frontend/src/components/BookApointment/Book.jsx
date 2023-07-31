@@ -10,7 +10,7 @@ function Book(){
     const user = useFetchUser();
 
     return(
-        <div id="appointment">
+        <div id="appointment" className="book-part">
             <div className="hero mb-0">
                 <img src={bgImg} alt="doctor" />
                 <div className="hero-overlay"></div>
@@ -41,7 +41,7 @@ function Book(){
             
             {!user && (
                 <>
-                    <div className="d-flex flex-column justify-content-center align-items-center gap-5 mb-5 mt-5">
+                    <div className="go-to-book d-flex flex-column justify-content-center align-items-center gap-5 mb-5 mt-5">
                         <div>
                             <h3 className="text-to-book">To book an appointment please Sign in or Sign up!</h3>
                         </div>
@@ -67,9 +67,9 @@ function Book(){
 
             {user && (
                 <>
-                    <div className="d-flex flex-column justify-content-center align-items-center gap-5 mb-5 mt-5">
+                    <div className="go-to-book d-flex flex-column justify-content-center align-items-center gap-5 mb-5 mt-5">
                         <div>
-                            <h3 className="text-to-book">You can't change the appointment if it's in less than 24 hours!</h3>
+                            <h3 className="text-to-book">You can not change the appointment if it is in less than 24 hours!</h3>
                         </div>
                         <div className="d-flex flex-row gap-5 justify-content-center">
                             <NavLink className="button-text" to="/booking">
