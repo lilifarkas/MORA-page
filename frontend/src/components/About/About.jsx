@@ -3,8 +3,8 @@ import bgImg from '../../images/Névtelen terv (22).png';
 import doctorImg from '../../images/Névtelen terv (17).png';
 import missionImg from '../../images/Névtelen terv (24).png';
 import React, { useState } from 'react';
-import FadeIn from "../Animation/FadeIn"
 import Trail from "../Animation/Trail"
+import Fade from "../Animation/Fade"
 
 
 function MainPage(){
@@ -52,29 +52,29 @@ function MainPage(){
                 <div className="mt-5 about2 d-flex justify-content-center">
                     <div className="">
                         <div className="service child d-flex flex-column justify-content-center align-items-center text-center">
-                            <FadeIn>
+                            <Fade>
                                 <h3>Experienced Staff</h3>
                                 <p>Our team of medical professionals has years of experience and is dedicated to providing
                                     the highest quality care to our patients.</p>
-                            </FadeIn>
+                            </Fade>
                         </div>
                     </div>
                     <div className="">
                         <div className="service child d-flex flex-column justify-content-center align-items-center text-center">
-                            <FadeIn>
+                            <Fade>
                                 <h3>Convenient Appointments</h3>
                                 <p>We offer flexible scheduling options, so that you can get the care you need when it is
                                     most convenient for you.</p>
-                            </FadeIn>
+                            </Fade>
                         </div>
                     </div>
                     <div className="">
                         <div className="service child d-flex flex-column justify-content-center align-items-center text-center">
-                            <FadeIn>
+                            <Fade>
                                 <h3>Compassionate Care</h3>
                                 <p>We treat every patient with the respect, dignity, and kindness they deserve.
                                     You can trust us to provide the care you need.</p>
-                            </FadeIn>
+                            </Fade>
                         </div>
                     </div>
                 </div>
