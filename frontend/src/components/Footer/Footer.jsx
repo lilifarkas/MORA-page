@@ -1,4 +1,5 @@
 import { FaFacebook, FaInstagram, FaViber} from "react-icons/fa";
+import './Footer.css'
 
 function Footer(){
     
@@ -7,7 +8,7 @@ function Footer(){
     }
 
     return (
-        <div className="footer custom-bg-color">
+        <div className="footer custom-bg-color mb-3">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col text-center web">
@@ -15,13 +16,13 @@ function Footer(){
                     </div>
                     <div className='footer-socials d-flex flex-row justify-content-center gap-5 mb-3'>
                         <div className='footer-socials-logo'>
-                            < FaInstagram />
+                            < FaInstagram size={30}/>
                         </div>
                         <div className='footer-socials-logo' onClick={facebookClicked}>
-                            < FaFacebook />
+                            < FaFacebook size={30}/>
                         </div>
                         <div className='footer-socials-logo'>
-                            < FaViber />
+                            < FaViber size={30}/>
                         </div>
                     </div>
                 </div>
