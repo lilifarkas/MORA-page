@@ -27,12 +27,12 @@ function App() {
                             <FadeIn>
                                 <About />
                             </FadeIn>,
-                            <FadeIn>
-                                <Book />
-                            </FadeIn>,
-                            <FadeIn>
-                                <Contact />
-                            </FadeIn>,
+                            
+                            <Book />
+                            ,
+                            
+                            <Contact />
+                            ,
                             <FadeIn>
                                 <Footer />
                             </FadeIn>,
