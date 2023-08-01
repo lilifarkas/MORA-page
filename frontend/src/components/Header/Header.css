@@ -20,7 +20,7 @@ h1, h4 {
     white-space: nowrap;
 }
 
-.btn-primary {
+.btn-cta {
     background-color: #fff;
     color: rgb(74,100,111);
     border-color: rgb(74,100,111);
@@ -28,14 +28,13 @@ h1, h4 {
     padding: 10px 25px;
     font-size: 1.2rem;
     font-weight: bold;
-    transition: all 0.3s ease-in-out;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
-.btn-primary:hover {
-    background-color: rgb(74,100,111);
-    color: rgb(203,170,119)
+.btn-cta:hover {
+    color: rgb(203,170,119);
+    border-color: rgb(74,100,111);
 }
 
 .ctaButton{
@@ -43,5 +42,5 @@ h1, h4 {
 }
 
 .ctaButton:hover{
-    color: rgb(203,170,119)
+    color: rgb(203,170,119);
 }

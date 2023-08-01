@@ -13,7 +13,7 @@ function Header(){
                         <div className="">
                             <h1 className="">Prevention and Rehabilitation Center</h1>
                             
-                            <a className="btn btn-primary" href="#" role="button">
+                            <a className="btn btn-cta" href="#" role="button">
                                 <ButtonAnimation>
                                     <NavLink
                                         activeClass="active"
