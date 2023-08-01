@@ -12,7 +12,7 @@
 }
 
 .profile-buttons:hover {
-    background-color: rgba(203, 170, 119, 0.65);
+    background-color: rgba(203, 170, 119, 0.35);
     border-color: rgba(203, 170, 119, 0.65);
     color: #fff;
 }
@@ -40,4 +40,8 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+}
+
+.hero-text > .d-flex > div {
+    text-align: left;
 }
