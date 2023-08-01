@@ -31,21 +31,21 @@
     font-size: 25px;
 }
 
-.logout{
+.logout {
+    background-color: rgb(203,170,119);
+    border-color: rgb(203,170,119);
+    color: #fff;
     margin-left: 20px;
-    background-color: #fff;
-    color: rgb(74,100,111);
-    border-color: rgb(74,100,111);
     border-radius: 100px;
-    padding: 5px 10px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
 }
 
-.logout:hover{
-    background-color: rgba(255, 255, 255, 0.69);
-    color: rgb(203,170,119)
+.logout:hover {
+    background-color: rgba(203, 170, 119, 0.35);
+    border-color: rgba(203, 170, 119, 0.65);
+    color: #fff;
 }

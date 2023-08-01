@@ -53,12 +53,16 @@ function NavBar(){
                     </a>
                     {user && 
                         <>
-                            <p className="name">
-                                Hello {user.name}
-                            </p>
-                            <button className="logout" onClick={handleLogout}>
-                                <FiLogOut />
-                            </button>
+                            <div className="d-flex flex-row align-items-center justify-content-center">
+                                <div>
+                                    <p className="name text-center">
+                                        Hello {user.name}
+                                    </p>
+                                </div>
+                                <button className="logout" onClick={handleLogout}>
+                                    <FiLogOut />
+                                </button>
+                            </div>
                         </>
                         }
                     <button
@@ -73,7 +77,7 @@ function NavBar(){
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav ms-auto">
+                        <ul className="navbar-nav ms-auto ">
                             <li className="nav-item">
                                 <Link
                                     activeClass="active"
