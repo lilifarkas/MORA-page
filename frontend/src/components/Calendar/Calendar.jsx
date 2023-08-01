@@ -8,6 +8,7 @@ import 'react-calendar/dist/Calendar.css';
 import "./Calendar.css"
 import Modal from "react-modal";
 import URL from '../../Constants/ConstantUrl';
+import useFetchDates from '../../hooks/UseFetchDates';
 
 
 function CalendarToBook(){
@@ -15,7 +16,7 @@ function CalendarToBook(){
     const navigate = useNavigate();
     const [date, setDate] = useState(new Date());
     const greyDays = [1, 2, 0]; // Monday, Tuesday, Sunday
-    const greenDays = [3, 4, 5, 6]; // Wednesday, Thursday, Friday, Saturday
+    const greenDays = [1, 2, 3, 4, 5]; // Wednesday, Thursday, Friday, Saturday
     const [clickedGreyDay, setClickedGreyDay] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedHours, setSelectedHours] = useState([]);
@@ -34,14 +35,27 @@ function CalendarToBook(){
         "date": new Date().toISOString(),
         "bookedTime": ""
     })
+    const dates = useFetchDates();
+    const [bookedDates, setBookedDates] = useState([]);
+
+    useEffect(() => {
+        const datesArray = Object.values(dates);
+        const bookedDates = datesArray.map(item => item.bookedTime);
+        setBookedDates(bookedDates);
+    }, [dates]);
 
     function getTileClassName({ date, view }) {
         const today = new Date();
-        if (date < today || date.getDay() === 0) {
+        const differenceInDays = Math.floor((date - today) / (1000 * 60 * 60 * 24));
+        console.log(bookedDates)
+        if (date.getDay() === 0 || date.getDay() === 6) {
             return 'grey-day';
-        } else if (greenDays.includes(date.getDay())) {
+        } else if (differenceInDays < 0) {
+            return 'grey-day';
+        } else {
             return 'green-day';
         }
+        
     }
 
     function handleDateChange(date) {
@@ -49,12 +63,10 @@ function CalendarToBook(){
     }
 
     function handleDayClick(date) {
-        if (
-            date < new Date() ||
-            date.getDay() === 0 ||
-            date.getDay() === 1 ||
-            date.getDay() === 2
-        ) {
+        const today = new Date();
+        const differenceInDays = Math.floor((date - today) / (1000 * 60 * 60 * 24));
+        
+        if (date.getDay() === 0 || date.getDay() === 6 || differenceInDays < 0) {
             console.log("Clicked on a grey day");
             setClickedGreyDay(true);
             setSelectedDate(null);
@@ -108,8 +120,9 @@ function CalendarToBook(){
             "bookedTime": bookedTime.toISOString()
         };
         console.log(user.id)
+        console.log(bookedTime)
         const response = await fetch(`${URL}dates/registerDate`, {
-            method: "POST",
+            method: "POST", 
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -197,7 +210,8 @@ function CalendarToBook(){
                                             <AvailableHours
                                                 date={selectedDate}
                                                 handleHourClick={handleHourClick}
-                                                selectedHours={selectedHours}/>
+                                                selectedHours={selectedHours}
+                                                bookedDates={bookedDates}/>
                                             <div className="mt-5">
                                                 <button
                                                     className="btn btn-primary profile-buttons"
@@ -229,7 +243,7 @@ function CalendarToBook(){
     );
 }
 
-function AvailableHours({ date, handleHourClick, selectedHours }) {
+function AvailableHours({ date, handleHourClick, selectedHours, bookedDates }) {
     const hours = [
         { startTime: "08:00", endTime: "10:00" },
         { startTime: "10:00", endTime: "12:00" },
@@ -241,8 +255,25 @@ function AvailableHours({ date, handleHourClick, selectedHours }) {
 
     const isHourSelected = (hour) => selectedHours.includes(hour);
 
+    const isHourBooked = (hour) => {
+        const startTime = hour.split(" - ")[0]; // Get the starting hour from the slot
+        const selectedDateTime = new Date(date);
+        selectedDateTime.setHours(parseInt(startTime.split(":")[0]), 0, 0, 0);
+
+        // Check if any booked date matches the selected date and start time
+        return bookedDates.some((bookedTime) => {
+            const bookedDateTime = new Date(bookedTime);
+            return (
+                bookedDateTime.toDateString() === selectedDateTime.toDateString() &&
+                bookedDateTime.getHours() === selectedDateTime.getHours()
+            );
+        });
+    };
+
     const handleClick = (hour) => {
-        handleHourClick(hour);
+        if (!isHourBooked(hour)) {
+            handleHourClick(hour);
+        }
     };
 
     return (
@@ -252,9 +283,13 @@ function AvailableHours({ date, handleHourClick, selectedHours }) {
                 {hours.map(({ startTime, endTime }) => {
                     const hour = `${startTime} - ${endTime}`;
                     const isSelected = isHourSelected(hour);
+                    const isDisabled = isHourBooked(hour);
                     const classNames = isSelected
                         ? "hour-slot selected"
-                        : "hour-slot";
+                        : isDisabled
+                            ? "hour-slot disabled"
+                            : "hour-slot";
+
                     return (
                         <div
                             key={hour}
