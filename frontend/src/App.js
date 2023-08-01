@@ -27,12 +27,8 @@ function App() {
                             <FadeIn>
                                 <About />
                             </FadeIn>,
-                            
-                            <Book />
-                            ,
-                            
-                            <Contact />
-                            ,
+                            <Book />,
+                            <Contact />,
                             <FadeIn>
                                 <Footer />
                             </FadeIn>,
