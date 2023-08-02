@@ -129,7 +129,7 @@ function Register() {
                                 onChange={(e) => setRegisterForm({...registerForm, confirmPassword: e.target.value})}
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="btn btn-primary" disabled={!registerForm.confirmPassword}>
                             Register
                         </button>
                     </form>
