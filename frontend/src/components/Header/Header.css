@@ -20,27 +20,26 @@ h1, h4 {
     white-space: nowrap;
 }
 
-.btn-cta {
-    background-color: #fff;
+.ctaButton {
+    background-color: rgb(203,170,119);
     color: rgb(74,100,111);
-    border-color: rgb(74,100,111);
+    border-color: rgb(215, 11, 11) !important;
     border-radius: 30px;
-    padding: 10px 25px;
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
+    width: 400px;
+    height: 50px;
 }
 
-.btn-cta:hover {
-    color: rgb(203,170,119);
+.cta-container .ctaButton {
     border-color: rgb(74,100,111);
+    display: flex;
+    justify-content: center;
 }
 
-.ctaButton{
-    color: rgb(74,100,111);
-}
-
-.ctaButton:hover{
-    color: rgb(203,170,119);
+.ctaButton:hover {
+    color: rgb(255, 255, 255);
+    border-color: rgb(74,100,111);
 }
