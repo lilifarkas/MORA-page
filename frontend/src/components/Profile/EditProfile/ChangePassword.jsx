@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
-import useFetchUser from "../../hooks/useFetchUser";
+import useFetchUser from "../../../hooks/useFetchUser";
 import {FiArrowLeft} from "react-icons/fi";
-import bgImg from "../../images/Névtelen terv (28).png";
-import URL from '../../Constants/ConstantUrl';
+import bgImg from "../../../images/Névtelen terv (28).png";
+import URL from '../../../Constants/ConstantUrl';
 
 function ChangePass( ) {
-    const fetchUser = useFetchUser();
+    const { user: fetchUser } = useFetchUser();
     const [user, setUser] = useState("");
     const [change, setChange] = useState(false);
     const[changePassForm, setChangePassForm] = useState({
