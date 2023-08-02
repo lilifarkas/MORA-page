@@ -10,10 +10,11 @@ import Register from "./components/Register/Register"
 import Profile from "./components/Profile/Profile"
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Edit from "./components/Profile/EditProfile"
-import ChangePassword from "./components/Profile/ChangePassword"
+import Edit from "./components/Profile/EditProfile/EditProfile"
+import ChangePassword from "./components/Profile/EditProfile/ChangePassword"
 import Calendar from "./components/Calendar/Calendar"
 import FadeIn from "./components/Animation/FadeIn"
+import CancelAppointment from "./components/Profile/CancelAppointment/CancelAppointment";
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
                         <Route path="/profile" element={[ <Profile />]} />
                         <Route path="/edit" element={[ <Edit />]} />
                         <Route path="/change-password" element={[ <ChangePassword />]} />
+                        <Route path="/cancel" element={[ <CancelAppointment />]} />
                         <Route path="/booking" element={[ <Calendar />]} />
                     </Routes>
             </Router>
