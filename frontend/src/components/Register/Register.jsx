@@ -58,8 +58,7 @@ function Register() {
         <div className="main1" id="contact">
             <div className="main2">
                 <img src={bgImg} alt="doctor" />
-                <div className="hero-overlay"></div>
-                <div className="hero-text">
+                <div className="hero-text mt-5">
                     <NavLink
                         to="/"
                         className="back"
