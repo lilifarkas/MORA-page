@@ -201,3 +201,20 @@
     cursor: not-allowed; 
     pointer-events: none; 
 }
+
+.btn-sign{
+    margin-left: 50px;
+    background-color: rgb(203,170,119);
+    border-color: rgb(203,170,119);
+    color: #fff;
+    border-radius: 30px;
+    padding: 5px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.btn-sign:hover{
+    background-color: rgb(147, 125, 85);
+}

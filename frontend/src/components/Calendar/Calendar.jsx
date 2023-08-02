@@ -1,7 +1,7 @@
 import bgImg from "../../images/Névtelen terv (28).png";
 import React, {useEffect, useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
-import { FiArrowLeft } from 'react-icons/fi';
+import {FiArrowLeft, FiLogOut} from 'react-icons/fi';
 import useFetchUser from '../../hooks/useFetchUser';
 import { Calendar } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -24,15 +24,7 @@ function CalendarToBook(){
     const [clickedHour, setClickedHour] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [bookingForm, setBookingForm] = useState({
-        user: {
-            id: null,
-            name: "",
-            role: "",
-            email: "",
-            phone: "",
-            password: "",
-            bookedDates: [],
-        },
+        userId: "",
         date: new Date().toISOString(),
         bookedTime: "",
     });
@@ -44,15 +36,7 @@ function CalendarToBook(){
         if (fetchUser) {
             setBookingForm((prevBookingForm) => ({
                 ...prevBookingForm,
-                user: {
-                    id: fetchUser.id,
-                    name: fetchUser.name,
-                    role: fetchUser.role,
-                    email: fetchUser.email,
-                    phone: fetchUser.phone,
-                    password: fetchUser.password,
-                    bookedDates: fetchUser.bookedDates,
-                },
+                userId: fetchUser.id,
             }));
         }
     }, [fetchUser]);
@@ -131,10 +115,7 @@ function CalendarToBook(){
         );
 
         const updatedBookingForm = {
-            "user": {
-                ...bookingForm.user,
-                id: user.id,
-            },
+            "userId": user.id,
             "date": new Date().toISOString(),
             "bookedTime": bookedTime.toISOString()
         };
@@ -175,12 +156,14 @@ function CalendarToBook(){
                 <img src={bgImg} alt="doctor" />
                 <div className="hero-text">
                     <div className="back-button">
+                        
                         <NavLink
                             to="/"
                             className="back"
                         >
-                            <FiArrowLeft className="back-icon" />
-                            Back
+                            <button className="logout">
+                                <FiArrowLeft />
+                            </button>
                         </NavLink>
                     </div>
                     <h1>Book appointment</h1>
@@ -192,12 +175,12 @@ function CalendarToBook(){
                                 </div>
                                 <div className="d-flex flex-row gap-5 justify-content-center">
                                     <NavLink className="button-text" to="/register">
-                                        <button className="btn btn-primary">
+                                        <button className="btn-sign">
                                             SIGN UP
                                         </button>
                                     </NavLink>
                                     <NavLink className="button-text" to="/login">
-                                        <button className="btn btn-primary">
+                                        <button className="btn-sign">
                                             SIGN IN
                                         </button>
                                     </NavLink>
@@ -237,20 +220,23 @@ function CalendarToBook(){
                                                     disabled={!selectedHours || selectedHours.length === 0}>
                                                     BOOK</button>
                                             </div>
-                                            <Modal
-                                                isOpen={showModal}
-                                                onRequestClose={() => setShowModal(false)}
-                                                contentLabel="Booking an appointment Modal"
-                                                className="modal"
-                                                appElement={document.getElementById('root') || undefined}
-                                                style={{overlay: {zIndex: 3}}}
-                                            >
-                                                <h2 className="titles">Are you sure you want to book this appointment? {selectedDate.toDateString()}, {selectedHours}</h2>
-                                                <div className="d-flex flex-row gap-5 mt-3">
-                                                    <button className="btn btn-primary" onClick={bookAnAppointment}>YES</button>
-                                                    <button className="btn btn-primary" onClick={handleCancel}>NO</button>
-                                                </div>
-                                            </Modal>
+                                            <div>
+                                                <Modal
+                                                    isOpen={showModal}
+                                                    onRequestClose={() => setShowModal(false)}
+                                                    contentLabel="Booking an appointment Modal"
+                                                    className="modal d-flex justify-content-center align-items-center"
+                                                    appElement={document.getElementById('root') || undefined}
+                                                    style={{overlay: {zIndex: 3}}}
+                                                >
+                                                    <h2 className="titles">Are you sure you want to book this appointment? {selectedDate.toDateString()}, {selectedHours}</h2>
+                                                    <div className="d-flex flex-row gap-5 mt-3">
+                                                        <button className="btn btn-primary" onClick={bookAnAppointment}>YES</button>
+                                                        <button className="btn btn-primary" onClick={handleCancel}>NO</button>
+                                                    </div>
+                                                </Modal>
+                                            </div>
+                                            
                                         </div>
                                     </>
                                 )}
