@@ -131,7 +131,14 @@
 }
 
 .text-container {
-    width: 80%; /* set the desired width */
+    width: 100%;
+    max-width: 600px; /* Set the maximum width to 600px */
+    margin: 0 auto; /* Center the container */
+    padding: 0 20px; /* Add some horizontal padding */
+    overflow-wrap: break-word;
+    /* Add the following to prevent the text from being cut off horizontally */
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .text-container2{

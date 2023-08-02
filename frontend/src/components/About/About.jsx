@@ -23,12 +23,12 @@ function MainPage(){
                 <div className="container">
                     <div className="d-flex justify-content-center gap-5 align-items-center">
                         <div className="text-center text-container">
-                            <Trail open={open}>
+                            <Fade open={open}>
                                 <h2>Welcome to Our Clinic</h2>
                                 <p>At Our Clinic, we are committed to providing the highest quality medical care to our patients. Our team of highly trained medical professionals will work with you to create a personalized treatment plan that meets your specific needs and goals.</p>
                                 <p>Whether you are dealing with a chronic condition or simply need a routine check-up, we are here to help.
                                     Contact us today to schedule an appointment and experience the difference of personalized medical care.</p>
-                            </Trail>
+                            </Fade>
                         </div>
                         <div className="">
                             <img src={doctorImg} alt="two doctors smiling" className="doctorsPic"/>
@@ -40,12 +40,12 @@ function MainPage(){
                             <img src={missionImg} alt="doctor and a patient" className="doctorsPic"/>
                         </div>
                         <div className="text-center text-container">
-                            <Trail open={open}>
+                            <Fade open={open}>
                                 <h2>Our Mission</h2>
                                 <p>Our mission is to provide compassionate, patient-centered medical care to the communities we serve. We believe that every patient deserves to be treated with respect, dignity, and kindness.</p>
                                 <p>We are committed to staying at the forefront of medical research and technology,
                                     so that we can continue to offer our patients the latest and most effective treatments available.</p>
-                            </Trail>
+                            </Fade>
                         </div>
                     </div>
                 </div>
