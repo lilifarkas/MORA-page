@@ -1,57 +1,53 @@
 import React, {useEffect, useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
-import useFetchUser from "../../hooks/useFetchUser";
+import useFetchUser from "../../../hooks/useFetchUser";
 import {FiArrowLeft} from "react-icons/fi";
-import bgImg from "../../images/Névtelen terv (28).png";
-import URL from '../../Constants/ConstantUrl';
+import bgImg from "../../../images/Névtelen terv (28).png";
+import URL from '../../../Constants/ConstantUrl';
 
-function EditProfile( ) {
-    const fetchUser = useFetchUser();
+function EditProfile() {
+    const { user: fetchUser } = useFetchUser();
     const [user, setUser] = useState("");
     const [profileUpdated, setProfileUpdated] = useState(false);
-    const[editUserForm, setEditUserForm] = useState({
-        "name": "",
-        "email": "",
-        "phone": ""
-    })
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const userData = fetchUser;
-                setUser(userData);
-            } catch (error) {
-                // Handle error scenarios
-            }
-        };
+    const [editUserForm, setEditUserForm] = useState({
+        name: "",
+        email: "",
+        phone: "",
+    });
 
-        fetchData();
+    useEffect(() => {
+        setUser(fetchUser);
     }, [fetchUser]);
 
-   
+
     const onSubmit = async (e) => {
         e.preventDefault();
-        
+
         const response = await fetch(`${URL}users/update/${user.id}`, {
             method: "PUT",
             body: JSON.stringify(editUserForm),
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
-            credentials: 'include'
+            credentials: "include",
         });
-        
+
         if (!response.ok) {
             const errorResponse = await response.json();
             // const errorMessage = errorResponse.errorMessages[0];
-            alert(errorResponse)
+            alert(errorResponse);
             console.log(errorResponse);
-            return
+            return;
         }
         setProfileUpdated(true);
-       
     };
 
+    const formFilled =  (
+        editUserForm.name &&
+        editUserForm.email &&
+        editUserForm.phone 
+    );
+        
     return (
         <div className="main1" id="contact">
                 <div className="main2">
@@ -107,7 +103,7 @@ function EditProfile( ) {
                                             setEditUserForm({ ...editUserForm, phone: e.target.value })}
                                     />
                                 </div>
-                                <button type="submit" className="btn btn-primary">
+                                <button type="submit" className="btn btn-primary" disabled={!formFilled}>
                                     Save
                                 </button>
                             </form>
