@@ -73,9 +73,6 @@ function Book(){
             {user && (
                 <>
                     <div className="go-to-book d-flex flex-column justify-content-center align-items-center gap-5 mb-5 mt-5">
-                        <div>
-                            <h3 className="text-to-book">You can not change the appointment if it is in less than 24 hours!</h3>
-                        </div>
                         <div className="d-flex flex-row gap-5 justify-content-center">
                             <NavLink className="button-text" to="/booking">
                                 <button className="btn book-part-buttons">
