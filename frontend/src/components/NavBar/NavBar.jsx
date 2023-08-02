@@ -8,7 +8,7 @@ import useFetchUser from '../../hooks/useFetchUser';
 import URL from '../../Constants/ConstantUrl';
 
 function NavBar(){
-    const user = useFetchUser();
+    const { user, loading } = useFetchUser();
     const navigate = useNavigate();
     
     const handleLogout = async (e) => {
@@ -39,8 +39,6 @@ function NavBar(){
         }, 1000);
     };
     
-    
-    
     return(
         <header id="home">
             <nav className="navbar navbar-expand-lg navbar-light">
@@ -59,9 +57,6 @@ function NavBar(){
                                         Hello {user.name}
                                     </p>
                                 </div>
-                                <button className="logout" onClick={handleLogout}>
-                                    <FiLogOut />
-                                </button>
                             </div>
                         </>
                         }
@@ -78,7 +73,7 @@ function NavBar(){
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav ms-auto ">
-                            <li className="nav-item">
+                            <li className="nav-items">
                                 <Link
                                     activeClass="active"
                                     to="home"
@@ -90,7 +85,7 @@ function NavBar(){
                                     <p className="nav-title">Home</p>
                                 </Link>
                             </li>
-                            <li className="nav-item">
+                            <li className="nav-items">
                                 <Link
                                     activeClass="active"
                                     to="about"
@@ -102,7 +97,7 @@ function NavBar(){
                                     <p className="nav-title">About</p>
                                 </Link>
                             </li>
-                            <li className="nav-item">
+                            <li className="nav-items">
                                 <Link
                                     activeClass="active"
                                     to="appointment"
@@ -114,7 +109,7 @@ function NavBar(){
                                     <p className="nav-title">Appointment</p>
                                 </Link>
                             </li>
-                            <li className="nav-item">
+                            <li className="nav-items">
                                 <Link
                                     activeClass="active"
                                     to="contact"
@@ -124,11 +119,12 @@ function NavBar(){
                                     className="nav-link"
                                 >
                                     <p className="nav-title">Contact</p>
+                                    
                                 </Link>
                             </li>
                             {!user &&
                                 <>
-                                    <li className="nav-item">
+                                    <li className="nav-items">
                                         <NavLink
                                             to="/login"
                                             offset={-70}
@@ -138,7 +134,7 @@ function NavBar(){
                                             Sign In
                                         </NavLink>
                                     </li>
-                                    <li className="nav-item">
+                                    <li className="nav-items">
                                         <NavLink
                                             to="/register"
                                             offset={-70}
@@ -150,17 +146,20 @@ function NavBar(){
                                     </li>
                                 </>
                             }
-                            
+
                             {user &&
-                                <li className="nav-item">
+                                <li className="nav-items d-flex flex-row align-items-center">
                                     <NavLink
                                         to="/profile"
                                         offset={-70}
                                         duration={200}
-                                        className="nav-link"
+                                        className="nav-link align-self-start"
                                     >
                                         Profile
                                     </NavLink>
+                                    <button className="logout" onClick={handleLogout}>
+                                        <FiLogOut />
+                                    </button>
                                 </li>}
                         </ul>
                     </div>

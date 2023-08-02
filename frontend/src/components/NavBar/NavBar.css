@@ -1,21 +1,27 @@
 
 .navbar {
-    padding-top: 0.2rem;
+    padding-top: 0.1rem;
     padding-bottom: 0.1rem;
     background-color: rgb(74,100,111);
+    display: flex;
+    align-items: center;
 }
 
 .navbar-brand img {
     max-height: 60px;
 }
 
-.nav-item {
-    margin-right: 1rem;
+.nav-items {
+    margin-right: 12px;
+    justify-content: center;
+    align-items: center;
 }
 
 .nav-link {
     color: #ffffff;
     font-size: 25px;
+    display: flex;
+    align-self: center;
 }
 
 .nav-link:hover {
