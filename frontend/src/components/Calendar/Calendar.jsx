@@ -12,7 +12,8 @@ import useFetchDates from '../../hooks/UseFetchDates';
 
 
 function CalendarToBook(){
-    const user = useFetchUser();
+    const { user: fetchUser } = useFetchUser();
+    const [user, setUser] = useState("");
     const navigate = useNavigate();
     const [date, setDate] = useState(new Date());
     const greyDays = [1, 2, 0]; // Monday, Tuesday, Sunday
@@ -22,21 +23,39 @@ function CalendarToBook(){
     const [selectedHours, setSelectedHours] = useState([]);
     const [clickedHour, setClickedHour] = useState(null);
     const [showModal, setShowModal] = useState(false);
-    const[bookingForm, setBookingForm] = useState({
-        "user": {
-            "id": null,
-            "name": `${user.name}`,
-            "role": `${user.role}`,
-            "email": `${user.email}`,
-            "phone": `${user.phone}`,
-            "password": `${user.password}`,
-            "bookedDates": user.bookedDates
+    const [bookingForm, setBookingForm] = useState({
+        user: {
+            id: null,
+            name: "",
+            role: "",
+            email: "",
+            phone: "",
+            password: "",
+            bookedDates: [],
         },
-        "date": new Date().toISOString(),
-        "bookedTime": ""
-    })
+        date: new Date().toISOString(),
+        bookedTime: "",
+    });
     const dates = useFetchDates();
     const [bookedDates, setBookedDates] = useState([]);
+
+    useEffect(() => {
+        setUser(fetchUser);
+        if (fetchUser) {
+            setBookingForm((prevBookingForm) => ({
+                ...prevBookingForm,
+                user: {
+                    id: fetchUser.id,
+                    name: fetchUser.name,
+                    role: fetchUser.role,
+                    email: fetchUser.email,
+                    phone: fetchUser.phone,
+                    password: fetchUser.password,
+                    bookedDates: fetchUser.bookedDates,
+                },
+            }));
+        }
+    }, [fetchUser]);
 
     useEffect(() => {
         const datesArray = Object.values(dates);
@@ -55,7 +74,7 @@ function CalendarToBook(){
         } else {
             return 'green-day';
         }
-        
+
     }
 
     function handleDateChange(date) {
@@ -65,7 +84,7 @@ function CalendarToBook(){
     function handleDayClick(date) {
         const today = new Date();
         const differenceInDays = Math.floor((date - today) / (1000 * 60 * 60 * 24));
-        
+
         if (date.getDay() === 0 || date.getDay() === 6 || differenceInDays < 0) {
             console.log("Clicked on a grey day");
             setClickedGreyDay(true);
@@ -85,20 +104,20 @@ function CalendarToBook(){
         } else {
             if (selectedHours.length < 1) {
                 setSelectedHours([...selectedHours, hour]);
-                
+
             } else {
                 setSelectedHours([hour]);
-                
+
             }
         }
         setClickedHour(hour);
-        
+
     }
 
     const handleCancel = () => {
         setShowModal(false);
     }
-    
+
     const bookAnAppointment = async (e) => {
         e.preventDefault();
 
@@ -154,7 +173,6 @@ function CalendarToBook(){
     return (
             <div className="main4">
                 <img src={bgImg} alt="doctor" />
-                <div className="hero-overlay"></div>
                 <div className="hero-text">
                     <div className="back-button">
                         <NavLink
@@ -224,6 +242,8 @@ function CalendarToBook(){
                                                 onRequestClose={() => setShowModal(false)}
                                                 contentLabel="Booking an appointment Modal"
                                                 className="modal"
+                                                appElement={document.getElementById('root') || undefined}
+                                                style={{overlay: {zIndex: 3}}}
                                             >
                                                 <h2 className="titles">Are you sure you want to book this appointment? {selectedDate.toDateString()}, {selectedHours}</h2>
                                                 <div className="d-flex flex-row gap-5 mt-3">
@@ -237,7 +257,7 @@ function CalendarToBook(){
                             </div>
                         </>
                     )}
-                    
+
                 </div>
             </div>
     );
