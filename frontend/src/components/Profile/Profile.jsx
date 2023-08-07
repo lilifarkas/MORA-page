@@ -56,12 +56,13 @@ function Profile(){
                             to="/"
                             className="back"
                         >
-                            <FiArrowLeft className="back-icon" /> 
-                            Back
+                            <button className="logout">
+                                <FiArrowLeft />
+                            </button>
                         </NavLink>
                     </div>
-                    <h1 className="mt-4">Profile</h1>
-                    <div className="d-flex flex-row main3 justify-content-center gap-5 mt-3">
+                    <h1 className="mt-2">Profile</h1>
+                    <div className="d-flex flex-row main3 justify-content-center gap-5 mt-1">
                         <div>
                             {user && <>
                                 <h1>Name: {user.name}</h1>
