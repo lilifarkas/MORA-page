@@ -61,11 +61,13 @@ function Register() {
                 <div className="hero-text mt-5">
                     <NavLink
                         to="/"
-                        className="back"
+                        className="back mt-4"
                     >
-                        <FiArrowLeft className="back-icon" />
-                        Back
+                        <button className="logout">
+                            <FiArrowLeft />
+                        </button>
                     </NavLink>
+                    <div className="hero-overlay"></div>
                     <h1>Register</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
