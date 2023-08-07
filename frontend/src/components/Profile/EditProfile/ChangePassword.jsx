@@ -107,8 +107,9 @@ function ChangePass( ) {
                         to="/profile"
                         className="back"
                     >
-                        <FiArrowLeft className="back-icon" />
-                        Back
+                        <button className="logout">
+                            <FiArrowLeft />
+                        </button>
                     </NavLink>
                     <h1>Change Password</h1>
                     <h5 className="text-white">After changing your password, you have to log in!</h5> 

@@ -58,8 +58,9 @@ function EditProfile() {
                             to="/profile"
                             className="back"
                         >
-                            <FiArrowLeft className="back-icon" />
-                            Back
+                            <button className="logout">
+                                <FiArrowLeft />
+                            </button>
                         </NavLink>
                         <h1>Edit Profile</h1>
                         {profileUpdated ? (
