@@ -154,12 +154,12 @@ function CalendarToBook(){
     return (
             <div className="main4">
                 <img src={bgImg} alt="doctor" />
-                <div className="hero-text">
-                    <div className="back-button">
+                <div className="hero-text hero-calendar">
+                    <div className="back-button mt-5">
                         
                         <NavLink
                             to="/"
-                            className="back"
+                            className="back-calendar"
                         >
                             <button className="logout">
                                 <FiArrowLeft />
@@ -262,11 +262,10 @@ function AvailableHours({ date, handleHourClick, selectedHours, bookedDates }) {
     const isHourSelected = (hour) => selectedHours.includes(hour);
 
     const isHourBooked = (hour) => {
-        const startTime = hour.split(" - ")[0]; // Get the starting hour from the slot
+        const startTime = hour.split(" - ")[0]; 
         const selectedDateTime = new Date(date);
         selectedDateTime.setHours(parseInt(startTime.split(":")[0]), 0, 0, 0);
-
-        // Check if any booked date matches the selected date and start time
+        
         return bookedDates.some((bookedTime) => {
             const bookedDateTime = new Date(bookedTime);
             return (
