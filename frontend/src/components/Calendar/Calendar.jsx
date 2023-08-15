@@ -1,47 +1,64 @@
 import bgImg from "../../images/Névtelen terv (28).png";
 import React, {useEffect, useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
-import { FiArrowLeft } from 'react-icons/fi';
+import {FiArrowLeft, FiLogOut} from 'react-icons/fi';
 import useFetchUser from '../../hooks/useFetchUser';
 import { Calendar } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import "./Calendar.css"
 import Modal from "react-modal";
 import URL from '../../Constants/ConstantUrl';
+import useFetchDates from '../../hooks/UseFetchDates';
 
 
 function CalendarToBook(){
-    const user = useFetchUser();
+    const { user: fetchUser } = useFetchUser();
+    const [user, setUser] = useState("");
     const navigate = useNavigate();
     const [date, setDate] = useState(new Date());
     const greyDays = [1, 2, 0]; // Monday, Tuesday, Sunday
-    const greenDays = [3, 4, 5, 6]; // Wednesday, Thursday, Friday, Saturday
+    const greenDays = [1, 2, 3, 4, 5]; // Wednesday, Thursday, Friday, Saturday
     const [clickedGreyDay, setClickedGreyDay] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedHours, setSelectedHours] = useState([]);
     const [clickedHour, setClickedHour] = useState(null);
     const [showModal, setShowModal] = useState(false);
-    const[bookingForm, setBookingForm] = useState({
-        "user": {
-            "id": null,
-            "name": `${user.name}`,
-            "role": `${user.role}`,
-            "email": `${user.email}`,
-            "phone": `${user.phone}`,
-            "password": `${user.password}`,
-            "bookedDates": user.bookedDates
-        },
-        "date": new Date().toISOString(),
-        "bookedTime": ""
-    })
+    const [bookingForm, setBookingForm] = useState({
+        userId: "",
+        date: new Date().toISOString(),
+        bookedTime: "",
+    });
+    const dates = useFetchDates();
+    const [bookedDates, setBookedDates] = useState([]);
+
+    useEffect(() => {
+        setUser(fetchUser);
+        if (fetchUser) {
+            setBookingForm((prevBookingForm) => ({
+                ...prevBookingForm,
+                userId: fetchUser.id,
+            }));
+        }
+    }, [fetchUser]);
+
+    useEffect(() => {
+        const datesArray = Object.values(dates);
+        const bookedDates = datesArray.map(item => item.bookedTime);
+        setBookedDates(bookedDates);
+    }, [dates]);
 
     function getTileClassName({ date, view }) {
         const today = new Date();
-        if (date < today || date.getDay() === 0) {
+        const differenceInDays = Math.floor((date - today) / (1000 * 60 * 60 * 24));
+        console.log(bookedDates)
+        if (date.getDay() === 0 || date.getDay() === 6) {
             return 'grey-day';
-        } else if (greenDays.includes(date.getDay())) {
+        } else if (differenceInDays < 0) {
+            return 'grey-day';
+        } else {
             return 'green-day';
         }
+
     }
 
     function handleDateChange(date) {
@@ -49,12 +66,10 @@ function CalendarToBook(){
     }
 
     function handleDayClick(date) {
-        if (
-            date < new Date() ||
-            date.getDay() === 0 ||
-            date.getDay() === 1 ||
-            date.getDay() === 2
-        ) {
+        const today = new Date();
+        const differenceInDays = Math.floor((date - today) / (1000 * 60 * 60 * 24));
+
+        if (date.getDay() === 0 || date.getDay() === 6 || differenceInDays < 0) {
             console.log("Clicked on a grey day");
             setClickedGreyDay(true);
             setSelectedDate(null);
@@ -73,20 +88,20 @@ function CalendarToBook(){
         } else {
             if (selectedHours.length < 1) {
                 setSelectedHours([...selectedHours, hour]);
-                
+
             } else {
                 setSelectedHours([hour]);
-                
+
             }
         }
         setClickedHour(hour);
-        
+
     }
 
     const handleCancel = () => {
         setShowModal(false);
     }
-    
+
     const bookAnAppointment = async (e) => {
         e.preventDefault();
 
@@ -100,16 +115,14 @@ function CalendarToBook(){
         );
 
         const updatedBookingForm = {
-            "user": {
-                ...bookingForm.user,
-                id: user.id,
-            },
+            "userId": user.id,
             "date": new Date().toISOString(),
             "bookedTime": bookedTime.toISOString()
         };
         console.log(user.id)
+        console.log(bookedTime)
         const response = await fetch(`${URL}dates/registerDate`, {
-            method: "POST",
+            method: "POST", 
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -141,15 +154,16 @@ function CalendarToBook(){
     return (
             <div className="main4">
                 <img src={bgImg} alt="doctor" />
-                <div className="hero-overlay"></div>
-                <div className="hero-text">
-                    <div className="back-button">
+                <div className="hero-text hero-calendar">
+                    <div className="back-button mt-5">
+                        
                         <NavLink
                             to="/"
-                            className="back"
+                            className="back-calendar"
                         >
-                            <FiArrowLeft className="back-icon" />
-                            Back
+                            <button className="logout">
+                                <FiArrowLeft />
+                            </button>
                         </NavLink>
                     </div>
                     <h1>Book appointment</h1>
@@ -161,12 +175,12 @@ function CalendarToBook(){
                                 </div>
                                 <div className="d-flex flex-row gap-5 justify-content-center">
                                     <NavLink className="button-text" to="/register">
-                                        <button className="btn btn-primary">
+                                        <button className="btn-sign">
                                             SIGN UP
                                         </button>
                                     </NavLink>
                                     <NavLink className="button-text" to="/login">
-                                        <button className="btn btn-primary">
+                                        <button className="btn-sign">
                                             SIGN IN
                                         </button>
                                     </NavLink>
@@ -197,7 +211,8 @@ function CalendarToBook(){
                                             <AvailableHours
                                                 date={selectedDate}
                                                 handleHourClick={handleHourClick}
-                                                selectedHours={selectedHours}/>
+                                                selectedHours={selectedHours}
+                                                bookedDates={bookedDates}/>
                                             <div className="mt-5">
                                                 <button
                                                     className="btn btn-primary profile-buttons"
@@ -205,31 +220,36 @@ function CalendarToBook(){
                                                     disabled={!selectedHours || selectedHours.length === 0}>
                                                     BOOK</button>
                                             </div>
-                                            <Modal
-                                                isOpen={showModal}
-                                                onRequestClose={() => setShowModal(false)}
-                                                contentLabel="Booking an appointment Modal"
-                                                className="modal"
-                                            >
-                                                <h2 className="titles">Are you sure you want to book this appointment? {selectedDate.toDateString()}, {selectedHours}</h2>
-                                                <div className="d-flex flex-row gap-5 mt-3">
-                                                    <button className="btn btn-primary" onClick={bookAnAppointment}>YES</button>
-                                                    <button className="btn btn-primary" onClick={handleCancel}>NO</button>
-                                                </div>
-                                            </Modal>
+                                            <div>
+                                                <Modal
+                                                    isOpen={showModal}
+                                                    onRequestClose={() => setShowModal(false)}
+                                                    contentLabel="Booking an appointment Modal"
+                                                    className="modal d-flex justify-content-center align-items-center"
+                                                    appElement={document.getElementById('root') || undefined}
+                                                    style={{overlay: {zIndex: 3}}}
+                                                >
+                                                    <h2 className="titles">Are you sure you want to book this appointment? {selectedDate.toDateString()}, {selectedHours}</h2>
+                                                    <div className="d-flex flex-row gap-5 mt-3">
+                                                        <button className="btn btn-primary" onClick={bookAnAppointment}>YES</button>
+                                                        <button className="btn btn-primary" onClick={handleCancel}>NO</button>
+                                                    </div>
+                                                </Modal>
+                                            </div>
+                                            
                                         </div>
                                     </>
                                 )}
                             </div>
                         </>
                     )}
-                    
+
                 </div>
             </div>
     );
 }
 
-function AvailableHours({ date, handleHourClick, selectedHours }) {
+function AvailableHours({ date, handleHourClick, selectedHours, bookedDates }) {
     const hours = [
         { startTime: "08:00", endTime: "10:00" },
         { startTime: "10:00", endTime: "12:00" },
@@ -241,8 +261,24 @@ function AvailableHours({ date, handleHourClick, selectedHours }) {
 
     const isHourSelected = (hour) => selectedHours.includes(hour);
 
+    const isHourBooked = (hour) => {
+        const startTime = hour.split(" - ")[0]; 
+        const selectedDateTime = new Date(date);
+        selectedDateTime.setHours(parseInt(startTime.split(":")[0]), 0, 0, 0);
+        
+        return bookedDates.some((bookedTime) => {
+            const bookedDateTime = new Date(bookedTime);
+            return (
+                bookedDateTime.toDateString() === selectedDateTime.toDateString() &&
+                bookedDateTime.getHours() === selectedDateTime.getHours()
+            );
+        });
+    };
+
     const handleClick = (hour) => {
-        handleHourClick(hour);
+        if (!isHourBooked(hour)) {
+            handleHourClick(hour);
+        }
     };
 
     return (
@@ -252,9 +288,13 @@ function AvailableHours({ date, handleHourClick, selectedHours }) {
                 {hours.map(({ startTime, endTime }) => {
                     const hour = `${startTime} - ${endTime}`;
                     const isSelected = isHourSelected(hour);
+                    const isDisabled = isHourBooked(hour);
                     const classNames = isSelected
                         ? "hour-slot selected"
-                        : "hour-slot";
+                        : isDisabled
+                            ? "hour-slot disabled"
+                            : "hour-slot";
+
                     return (
                         <div
                             key={hour}

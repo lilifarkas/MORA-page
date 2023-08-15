@@ -58,15 +58,16 @@ function Register() {
         <div className="main1" id="contact">
             <div className="main2">
                 <img src={bgImg} alt="doctor" />
-                <div className="hero-overlay"></div>
-                <div className="hero-text">
+                <div className="hero-text mt-5">
                     <NavLink
                         to="/"
-                        className="back"
+                        className="back mt-4"
                     >
-                        <FiArrowLeft className="back-icon" />
-                        Back
+                        <button className="logout">
+                            <FiArrowLeft />
+                        </button>
                     </NavLink>
+                    <div className="hero-overlay"></div>
                     <h1>Register</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
@@ -129,7 +130,7 @@ function Register() {
                                 onChange={(e) => setRegisterForm({...registerForm, confirmPassword: e.target.value})}
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="btn btn-primary" disabled={!registerForm.confirmPassword}>
                             Register
                         </button>
                     </form>

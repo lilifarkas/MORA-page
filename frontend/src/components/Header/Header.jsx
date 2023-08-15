@@ -10,24 +10,22 @@ function Header(){
             <header className="main">
                 <div className="container-fluid p-4 text-center bg-light">
                     <div className="row">
-                        <div className="">
+                        <div className="d-flex flex-column justify-content-center align-items-center">
                             <h1 className="">Prevention and Rehabilitation Center</h1>
-                            
-                            <a className="btn btn-primary" href="#" role="button">
+                            <div className="cta-container">
                                 <ButtonAnimation>
                                     <NavLink
-                                        activeClass="active"
                                         to="/booking"
-                                        spy={true}
-                                        smooth={true}
+                                        spy={true.toString()}
+                                        smooth={true.toString()}
                                         offset={-70}
                                         duration={200}
                                         className="nav-link ctaButton"
                                     >
-                                            Book appointment
+                                        Book appointment
                                     </NavLink>
                                 </ButtonAnimation>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>

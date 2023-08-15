@@ -56,8 +56,9 @@ function LogIn() {
                         to="/"
                         className="back"
                     >
-                        <FiArrowLeft className="back-icon" />
-                        Back
+                        <button className="logout">
+                            <FiArrowLeft />
+                        </button>
                     </NavLink>
                     <h1>Log in</h1>
                     <form onSubmit={handleSubmit}>

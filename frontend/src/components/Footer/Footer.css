@@ -1,12 +1,7 @@
-.footer {
-    padding: 20px;
-    color: white;
+.footer-socials-logo{
+    cursor: pointer;
 }
 
-.custom-bg-color {
-    background-color: #333;
-}
-
-.web{
-    color: white;
+.opening-hours{
+    color: rgb(74,100,111);
 }

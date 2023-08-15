@@ -43,6 +43,19 @@ textarea {
     margin-bottom: 10px;
 }
 
+.btn-primary{
+    border-radius: 30px;
+    padding: 10px 25px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.btn-primary:hover{
+background-color: rgba(203, 170, 119, 0.35);
+}
+
 .btn-primary:disabled {
     background-color: rgb(74,100,111);
     border-color: rgb(74,100,111);

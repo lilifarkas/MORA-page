@@ -36,12 +36,12 @@ namespace backend.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UserID")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserId");
 
                     b.ToTable("BookedDates");
                 });
@@ -81,13 +81,11 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.Entities.BookedDate", b =>
                 {
-                    b.HasOne("backend.Models.Entities.User", "User")
+                    b.HasOne("backend.Models.Entities.User", null)
                         .WithMany("BookedDates")
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("backend.Models.Entities.User", b =>
