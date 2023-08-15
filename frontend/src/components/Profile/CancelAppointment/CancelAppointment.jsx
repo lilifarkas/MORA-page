@@ -11,7 +11,7 @@ import URL from "../../../Constants/ConstantUrl";
 function CancelAppointment( ) {
     const [showModal, setShowModal] = useState(false);
     const [refetch, setRefetch] = useState(false); 
-    const { user, loading, error, refetchUser } = useFetchUser(refetch);
+    const { user } = useFetchUser(refetch);
     const dates = useFetchDates();
     const [selectedBookingDate, setSelectedBookingDate] = useState(null);
     
@@ -55,8 +55,9 @@ function CancelAppointment( ) {
                         to="/profile"
                         className="back"
                     >
-                        <FiArrowLeft className="back-icon" />
-                        Back
+                        <button className="logout">
+                            <FiArrowLeft />
+                        </button>
                     </NavLink>
                     <h1>Cancel Appointment</h1>
                     <div>
