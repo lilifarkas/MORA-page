@@ -9,7 +9,6 @@ function Register() {
     const navigate = useNavigate();
     const[registerForm, setRegisterForm] = useState({
         "name": "",
-        "role": "",
         "email": "",
         "phoneNumber": "",
         "password": "",
@@ -38,7 +37,6 @@ function Register() {
 
         setRegisterForm({
             "name": '',
-            "role": '',
             "email": '',
             "phoneNumber": '',
             "password": '',
