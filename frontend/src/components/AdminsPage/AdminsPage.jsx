@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import URL from '../../Constants/ConstantUrl';
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import bgImg from "../../images/Névtelen terv (25).png";
 import './AdminsPage.css'
+import {FiArrowLeft} from "react-icons/fi";
 
 const Record = (props) => (
     <tr>
@@ -125,14 +126,22 @@ export default function RecordList() {
                     <div>Loading...</div>
                 ) : (
                     <>
-                        <div className="header">
+                        <div className="">
+                            <NavLink
+                                to="/"
+                                className="back"
+                            >
+                                <button className="logout">
+                                    <FiArrowLeft />
+                                </button>
+                            </NavLink>
                             <div className="title-container">
                                 <h3 className="title-users">Users</h3>
                             </div>
                             <div className="filter">
                                 <div>
-                                    <select id = "arrange" onChange={(e) => arrangeUsers(e.target.value)} >
-                                        <option> ---Arrange--- </option>
+                                    <select id = "arrange" className="arrange-select" onChange={(e) => arrangeUsers(e.target.value)} >
+                                        <option> Arrange </option>
                                         <option> By name </option>
                                         <option> By email </option>
                                         <option> By role </option>
@@ -153,7 +162,7 @@ export default function RecordList() {
                             </div>
                         </div>
                         <div className="table-container">
-                            <table className="table table-striped" style={{ marginTop: 20 }}>
+                            <table className="table" style={{ marginTop: 40 }}>
                                 <thead>
                                 <tr>
                                     <th>Name</th>
