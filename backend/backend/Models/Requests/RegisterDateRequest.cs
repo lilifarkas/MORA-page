@@ -6,7 +6,7 @@ namespace backend.Models.Requests;
 public class RegisterDateRequest
 {
     [Required]
-    public User User { get; set; }
+    public long UserId { get; set; }
     [Required]
     public string Date { get; set; }
     [Required]

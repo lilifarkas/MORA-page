@@ -33,7 +33,7 @@ public class DateController: ControllerBase
     {
         var registrationDate = new BookedDate()
         {
-            User = registerDateRequest.User,
+            UserId = registerDateRequest.UserId,
             Date = DateTime.Parse(registerDateRequest.Date),
             BookedTime = DateTime.Parse(registerDateRequest.BookedTime),
         };

@@ -13,7 +13,7 @@ public class DateService: IDateService
     }
     public async Task<BookedDate> Add(BookedDate date)
     {
-        var user = await _context.Users.FirstAsync(t => t.ID == date.User.ID);
+        var user = await _context.Users.FirstAsync(t => t.ID == date.UserId);
         if (user != null)
         {
             user.BookedDates.Add(date);
