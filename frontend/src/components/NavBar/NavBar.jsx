@@ -147,6 +147,20 @@ function NavBar(){
                                 </>
                             }
 
+
+                            {user && user.role === "Admin" &&
+                                <li className="nav-items d-flex flex-row align-items-center">
+                                    <NavLink
+                                        to="/adminsPage"
+                                        offset={-70}
+                                        duration={200}
+                                        className="nav-link align-self-start"
+                                    >
+                                        Admin page
+                                    </NavLink>
+                                </li>
+                            }
+
                             {user &&
                                 <li className="nav-items d-flex flex-row align-items-center">
                                     <NavLink
