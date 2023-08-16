@@ -6,7 +6,6 @@ public class RegisterRequest
 {
     [Required]
     public string Name { get; set; }
-    public string Role { get; set; }
     [Required]
     [EmailAddress]
     public string Email { get; set; }
