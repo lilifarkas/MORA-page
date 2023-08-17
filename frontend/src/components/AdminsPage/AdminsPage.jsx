@@ -10,12 +10,18 @@ const Record = (props) => (
     <tr>
         <td>{props.record.name}</td>
         <td>{props.record.email}</td>
-        <td>{props.record.phoneNumber}</td>
+        <td>{props.record.phone}</td>
         <td>{props.record.role}</td>
         <td>
-            {props.record.bookedDates.map((appointments) => (
-                <div key={appointments}>{appointments}</div>
-            ))}
+            {props.record.bookedDates.map((appointments) => {
+                const bookedTime = appointments.bookedTime;
+                const date = new Date(bookedTime);
+                const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} : ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+
+                return (
+                    <div key={appointments.id}>{formattedDate}</div>
+                );
+            })}
         </td>
     </tr>
 );
@@ -148,11 +154,13 @@ export default function RecordList() {
                             </div>
                             <div className="filter">
                                 <div>
-                                    <select id = "arrange" className="arrange-select" onChange={(e) => arrangeUsers(e.target.value)} >
-                                        <option> Arrange </option>
-                                        <option> By name </option>
-                                        <option> By email </option>
-                                        <option> By role </option>
+                                    <select id = "arrange" 
+                                            className="arrange-select"
+                                            onChange={(e) => arrangeUsers(e.target.value)} >
+                                        <option className="arrange-options"> Arrange </option>
+                                        <option className="arrange-options"> By name </option>
+                                        <option className="arrange-options"> By email </option>
+                                        <option className="arrange-options"> By role </option>
                                     </select>
                                 </div>
                                 <div>
