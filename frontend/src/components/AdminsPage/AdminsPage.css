@@ -17,11 +17,14 @@
 .inputs-admin{
     height: 10px;
     width: 200px;
+    border-radius: 30px;
 }
 
 .arrange-select{
     width: 200px;
     height: 33px;
+    border-radius: 30px;
+    text-align: center;
 }
 
 .table{
