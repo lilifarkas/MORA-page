@@ -4,6 +4,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import bgImg from "../../images/Névtelen terv (25).png";
 import './AdminsPage.css'
 import {FiArrowLeft} from "react-icons/fi";
+import AdminRegistrationModal from "./AdminRegistration";
 
 const Record = (props) => (
     <tr>
@@ -23,6 +24,7 @@ export default function RecordList() {
     const [isLoading, setIsLoading] = useState(true);
     const [records, setRecords] = useState([]);
     const navigate = useNavigate();
+    const [isModalOpen, setIsModalOpen] = useState(false);
     
     useEffect(() => {
         async function getRecords() {
@@ -127,14 +129,20 @@ export default function RecordList() {
                 ) : (
                     <>
                         <div className="">
-                            <NavLink
-                                to="/"
-                                className="back"
-                            >
-                                <button className="logout">
-                                    <FiArrowLeft />
+                            <div className="d-flex flex-row">
+                                <NavLink
+                                    to="/"
+                                    className="back"
+                                >
+                                    <button className="logout">
+                                        <FiArrowLeft />
+                                    </button>
+                                </NavLink>
+                                <button className="logout new-admin-button" onClick={() => setIsModalOpen(true)}>
+                                    Register new Admin
                                 </button>
-                            </NavLink>
+                                
+                            </div>
                             <div className="title-container">
                                 <h3 className="title-users">Users</h3>
                             </div>
@@ -175,6 +183,12 @@ export default function RecordList() {
                                 <tbody>{recordList()}</tbody>
                             </table>
                         </div>
+                        {isModalOpen &&
+                            <AdminRegistrationModal
+                                isOpen={isModalOpen}
+                                onRequestClose={() => setIsModalOpen(false)}
+                            />
+                        }
                     </>
                 )}
             </div>
