@@ -16,6 +16,7 @@ import Calendar from "./components/Calendar/Calendar"
 import FadeIn from "./components/Animation/FadeIn"
 import CancelAppointment from "./components/Profile/CancelAppointment/CancelAppointment";
 import AdminPage from './components/AdminsPage/AdminsPage'
+import Feedbacks from './components/Feedbacks/Feedbacks'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
                                 <About />
                             </FadeIn>,
                             <Book />,
+                            <Feedbacks />,
                             <Contact />,
                             <FadeIn>
                                 <Footer />
