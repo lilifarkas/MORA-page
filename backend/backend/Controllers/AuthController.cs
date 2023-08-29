@@ -57,7 +57,7 @@ public class AuthController : ControllerBase
         var registrationUser = new User()
         {
             Name = registerRequest.Name,
-            Role = registerRequest.Role,
+            Role = "User",
             Email = registerRequest.Email,
             Phone = registerRequest.PhoneNumber,
             Password = passwordHash
@@ -335,5 +335,46 @@ public class AuthController : ControllerBase
             v.Errors.Select(e => e.ErrorMessage));
         
         return BadRequest(new ErrorResponse(errorMessages));
+    }
+    
+    [HttpPost("register-admin")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> RegisterAdmin([FromBody] RegisterRequest registerRequest)
+    {
+        if (!ModelState.IsValid)
+        {
+            BadRequestModelState();
+        }
+        
+        if (registerRequest.Password != registerRequest.ConfirmPassword)
+        {
+            return BadRequest(new ErrorResponse("Password does not match confirm password"));
+        }
+        
+        var existingUserByEmail = await _service.GetByEmail(registerRequest.Email);
+        if (existingUserByEmail != null)
+        {
+            return Conflict(new ErrorResponse("Email already exist"));
+        }
+        
+        var existingUserByUsername = await _service.GetByName(registerRequest.Name);
+        if (existingUserByUsername != null)
+        {
+            return Conflict(new ErrorResponse("Name already exist"));
+        }
+        
+        var passwordHash = _passwordHasher.HashPassword(registerRequest.Password);
+        
+        var registrationUser = new User()
+        {
+            Name = registerRequest.Name,
+            Role = "Admin",
+            Email = registerRequest.Email,
+            Phone = registerRequest.PhoneNumber,
+            Password = passwordHash
+        };
+
+        await _service.Add(registrationUser);
+        return Ok();
     }
 }   

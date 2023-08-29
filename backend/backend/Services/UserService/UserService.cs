@@ -45,7 +45,9 @@ public class UserService: IUserService
 
     public async Task<IEnumerable<User>> GetAll()
     {
-        return await _context.Users.ToListAsync();
+        return await _context.Users
+            .Include(u => u.BookedDates)
+            .ToListAsync();
     }
 
     public async Task Update(User user, EditUserRequest editUser)

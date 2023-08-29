@@ -1,0 +1,39 @@
+
+.title-container{
+    color: white;
+    margin-bottom: 50px;
+}
+
+.title-users{
+    font-size: 3rem;
+}
+
+.filter{
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.inputs-admin{
+    height: 10px;
+    width: 200px;
+    border-radius: 30px;
+}
+
+.arrange-select{
+    width: 200px;
+    height: 33px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.table{
+    color: white;
+    width: 1200px;
+}
+
+.new-admin-button{
+    width: 250px;
+    font-size: 20px;
+}
+

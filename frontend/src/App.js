@@ -15,6 +15,7 @@ import ChangePassword from "./components/Profile/EditProfile/ChangePassword"
 import Calendar from "./components/Calendar/Calendar"
 import FadeIn from "./components/Animation/FadeIn"
 import CancelAppointment from "./components/Profile/CancelAppointment/CancelAppointment";
+import AdminPage from './components/AdminsPage/AdminsPage'
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
                         <Route path="/change-password" element={[ <ChangePassword />]} />
                         <Route path="/cancel" element={[ <CancelAppointment />]} />
                         <Route path="/booking" element={[ <Calendar />]} />
+                        <Route path="/adminsPage" element={[ <AdminPage />]} />
                     </Routes>
             </Router>
         </>
