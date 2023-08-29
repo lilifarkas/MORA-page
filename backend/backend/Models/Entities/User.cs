@@ -12,4 +12,6 @@ public class User
     public string Phone { get; set; }
     public string Password { get; set; }
     public virtual ICollection<BookedDate>? BookedDates { get; set; } = new List<BookedDate>();
+    public virtual ICollection<Feedback>? Feedbacks { get; set; } = new List<Feedback>();
+    
 }
