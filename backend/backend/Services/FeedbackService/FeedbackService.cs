@@ -1,4 +1,5 @@
 using backend.Models.Entities;
+using backend.Models.Requests;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services.FeedbackService;
@@ -52,5 +53,10 @@ public class FeedbackService : IFeedbackService
             .Where(p => p.ID == id)
             .Select(x => x.Feedbacks)
             .FirstOrDefaultAsync() ?? throw new InvalidOperationException();
+    }
+
+    public Task<Feedback> UpdateFeedback(long id, EditFeedbackRequest editFeedback)
+    {
+        throw new NotImplementedException();
     }
 }
