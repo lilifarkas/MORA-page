@@ -4,6 +4,7 @@ using backend;
 using backend.Models;
 using backend.Services;
 using backend.Services.Authenticator;
+using backend.Services.FeedbackService;
 using backend.Services.PasswordHasher;
 using backend.Services.TokenGenerators;
 using backend.Services.TokenValidator;
@@ -37,6 +38,7 @@ builder.Services.AddSingleton<Authenticator>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IDateService, DateService>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
