@@ -1,0 +1,40 @@
+.slider-navigation {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 500px;
+    margin-top: 150px;
+}
+
+.slider-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider-item {
+    position: absolute;
+    height: 100%;
+    will-change: transform;
+    width: 100%;
+}
+
+.slider-dotcontainer {
+    padding: 0.7rem 1rem;
+    margin: 1rem;
+    color: #d70b0b;
+    display: flex;
+    align-items: center;
+}
+
+.slider-dot {
+    border-radius: 99px;
+    background: #d70b0b;
+    width: 5px;
+    height: 5px;
+    margin: 0.3rem;
+    color: #000;
+}
