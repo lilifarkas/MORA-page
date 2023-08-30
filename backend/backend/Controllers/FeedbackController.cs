@@ -35,10 +35,10 @@ public class FeedbackController: ControllerBase
         var registrationFeedback = new Feedback()
         {
             UserId = registerFeedbackRequest.UserId,
-            Date = registerFeedbackRequest.Date,
+            Date = DateTime.Now,
             Comment = registerFeedbackRequest.Comment,
             Rating = registerFeedbackRequest.Rating,
-            IsApproved = registerFeedbackRequest.IsApproved
+            IsApproved = false
         };
         var response = await _service.Add(registrationFeedback);
         return Ok(response);
