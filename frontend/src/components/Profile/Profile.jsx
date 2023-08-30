@@ -6,11 +6,13 @@ import { FiArrowLeft } from 'react-icons/fi';
 import useFetchUser from '../../hooks/useFetchUser';
 import Modal from 'react-modal';
 import URL from '../../Constants/ConstantUrl';
+import FeedbackRegistrationModal from "./FeedbackForm/FeedbackForm";
 
 function Profile(){
     const { user, loading } = useFetchUser();
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     
     const handleEditProfile = async (e) => {
         e.preventDefault();
@@ -92,6 +94,9 @@ function Profile(){
                             >
                                 CANCEL APPOINTMENT
                             </a>
+                            <button className="btn btn-primary profile-buttons" onClick={() => setIsModalOpen(true)}>
+                                Leave a feedback
+                            </button>
                         </div>
                     </div>
                     
@@ -112,7 +117,13 @@ function Profile(){
                     <button className="btn btn-primary" onClick={handleCancel}>NO</button>
                 </div>
             </Modal>
-
+            {isModalOpen &&
+                <FeedbackRegistrationModal
+                    isOpen={isModalOpen}
+                    onRequestClose={() => setIsModalOpen(false)}
+                    user={user}
+                />
+            }
         </div>
     );
 }
