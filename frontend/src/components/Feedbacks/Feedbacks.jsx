@@ -19,11 +19,13 @@ function Feedbacks() {
                 }
 
                 const records = await response.json();
-                const formattedFeedbacks = records.map(feedback => ({
-                    css: 'url(./one.svg)',
-                    message: feedback.comment
-                }));
-                setFeedbacks(formattedFeedbacks);
+                const approvedFeedbacks = records
+                    .filter(feedback => feedback.isApproved) 
+                    .map(feedback => ({
+                        css: 'url(./one.svg)',
+                        message: feedback.comment
+                    }));
+                setFeedbacks(approvedFeedbacks);
                 console.log(records);
             } catch (error) {
                 console.error("Error fetching feedbacks:", error);
