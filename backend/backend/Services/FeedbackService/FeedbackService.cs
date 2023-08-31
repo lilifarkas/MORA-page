@@ -55,8 +55,20 @@ public class FeedbackService : IFeedbackService
             .FirstOrDefaultAsync() ?? throw new InvalidOperationException();
     }
 
-    public Task<Feedback> UpdateFeedback(long id, EditFeedbackRequest editFeedback)
+    public async Task UpdateFeedback(long id, EditFeedbackRequest editFeedback)
     {
-        throw new NotImplementedException();
+        var feedback = await _context.Feedbacks.FirstAsync(t => t.ID == id);
+        
+        if (feedback != null)
+        {
+            feedback.IsApproved = editFeedback.IsApproved;
+            feedback.ApprovingAdmin = editFeedback.ApprovingAdmin;
+            await _context.SaveChangesAsync();
+        }
+        else
+        {
+            throw new InvalidOperationException("User not found.");
+        }
+        
     }
 }
