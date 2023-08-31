@@ -17,6 +17,7 @@ import FadeIn from "./components/Animation/FadeIn"
 import CancelAppointment from "./components/Profile/CancelAppointment/CancelAppointment";
 import AdminPage from './components/AdminsPage/AdminsPage'
 import Feedbacks from './components/Feedbacks/Feedbacks'
+import FeedbackList from './components/AdminsPage/FeedbackList'
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
                         <Route path="/cancel" element={[ <CancelAppointment />]} />
                         <Route path="/booking" element={[ <Calendar />]} />
                         <Route path="/adminsPage" element={[ <AdminPage />]} />
+                        <Route path="/adminsPage/feedbacks" element={[ <FeedbackList />]} />
                     </Routes>
             </Router>
         </>
