@@ -124,6 +124,10 @@ export default function RecordList() {
         })
         setRecords(filtered)
     }
+
+    const openFeedbackList = () => {
+        navigate("/adminsPage/feedbacks");
+    };
     
     return (
         <div className="main2">
@@ -147,9 +151,12 @@ export default function RecordList() {
                                 <button className="logout new-admin-button" onClick={() => setIsModalOpen(true)}>
                                     Register new Admin
                                 </button>
+                                <button className="logout new-admin-button" onClick={() => openFeedbackList}>
+                                    Feedbacks
+                                </button>
                                 
                             </div>
-                            <div className="title-container">
+                            <div className="title-container mt-3">
                                 <h3 className="title-users">Users</h3>
                             </div>
                             <div className="filter">
