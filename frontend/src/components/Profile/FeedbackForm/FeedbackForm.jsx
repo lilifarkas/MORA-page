@@ -57,7 +57,7 @@ const FeedbackRegistrationModal = ({ isOpen, onRequestClose, user }) => {
         <Modal
             isOpen={isOpen}
             onRequestClose={onRequestClose}
-            className="modal"
+            className="modal-feedback"
             overlayClassName="modal-overlay"
             appElement={document.getElementById('root') || undefined}
         >

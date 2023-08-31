@@ -26,6 +26,103 @@
     background-color: white;
 }
 
-.modal{
+.modal-overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+}
+
+.modal-feedback {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    padding: 14px 28px;
+    border-radius: 8px;
+    max-width: 40%;
+    min-width: 20%;
+    max-height: 95%;
+    align-items: center;
+    overflow-y: auto;
     background-color: white;
+}
+
+.modal-feedback::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal-feedback::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.modal-feedback::-webkit-scrollbar-thumb {
+    background-color: rgb(203,170,119);
+    border-radius: 8px;
+}
+
+.modal-feedback::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(203, 170, 119, 0.65);
+}
+
+.modal-feedback button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #333;
+}
+
+.form-admin{
+    color: rgb(203,170,119);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.register-admin-title{
+    color: rgb(203,170,119);
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.form-group-admin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-main-container{
+    margin-top: 30px;
+}
+
+button[type='submit'] {
+    background-color: rgb(203,170,119);
+    border-color: rgb(203,170,119);
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    font-size: 1rem;
+    width: 200px;
+    height: 50px;
+}
+
+button[type='submit']:hover {
+    background-color: rgba(203, 170, 119, 0.65);
+    border-color: rgba(203, 170, 119, 0.65);
+    color: #fff;
 }
