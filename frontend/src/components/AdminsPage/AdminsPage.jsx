@@ -151,7 +151,7 @@ export default function RecordList() {
                                 <button className="logout new-admin-button" onClick={() => setIsModalOpen(true)}>
                                     Register new Admin
                                 </button>
-                                <button className="logout new-admin-button" onClick={() => openFeedbackList}>
+                                <button className="logout new-admin-button" onClick={() => openFeedbackList()}>
                                     Feedbacks
                                 </button>
                                 
