@@ -33,10 +33,18 @@ const Record = (props) => {
         }
     };
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
     return (
         <tr>
             <td>{props.record.userId}</td>
-            <td>{props.record.date}</td>
+            <td style={{width: props.dateWidth}}>{formatDate(props.record.date)}</td>
             <td>{props.record.rating}</td>
             <td style={{width: props.feedbackWidth}}>{props.record.comment}</td>
             <td>{props.record.isApproved.toString()}</td>
@@ -80,7 +88,7 @@ export default function FeedbackList() {
 
         getRecords();
 
-        return;
+        
     }, []);
 
 
@@ -91,52 +99,45 @@ export default function FeedbackList() {
                     record={record}
                     key={record._id}
                     feedbackWidth="70%"
+                    dateWidth="20%"
                 />
             );
         });
     }
 
-    async function filterName(e) {
-        const response = await fetch(`${URL}user`);
+    async function filterUserId(e) {
+        const response = await fetch(`${URL}feedbacks`);
         const records = await response.json();
 
-        let filtered = []
-        records.map(record => {
-            if((record.name.toLowerCase()).includes(e.toLowerCase())){
-                filtered.push(record)
-            }
-        })
+        const filtered = records.filter(record =>
+            record.userId.toString().includes(e)
+        );
         setRecords(filtered)
     }
 
-    async function filterEmail(e) {
-        const response = await fetch(`${URL}user`);
+    async function filterDate(e) {
+        const response = await fetch(`${URL}feedbacks`);
         const records = await response.json();
 
-        let filtered = []
-        records.map(record => {
-            if((record.email.toLowerCase()).includes(e.toLowerCase())){
-                filtered.push(record)
-            }
-        })
+        const filtered = records.filter(record =>
+            record.date.includes(e)
+        );
         setRecords(filtered)
     }
 
-    async function filterPhone(e) {
-        const response = await fetch(`${URL}user`);
+    async function filterRating(e) {
+        const response = await fetch(`${URL}feedbacks`);
         const records = await response.json();
 
-        let filtered = []
-        records.map(record => {
-            if((record.phone.toLowerCase()).includes(e.toLowerCase())){
-                filtered.push(record)
-            }
-        })
+        if (e.trim() === '') {
+            setRecords(records)
+            return;
+        }
+        
+        const filtered = records.filter(record =>
+            record.rating === parseInt(e)
+        );
         setRecords(filtered)
-    }
-
-    async function openFeedbackList() {
-
     }
 
     return (
@@ -164,16 +165,16 @@ export default function FeedbackList() {
                             </div>
                             <div className="filter">
                                 <div>
-                                    <input id="filterName" type="text" className="inputs-admin"
-                                           placeholder="Filter by name" onChange={(e) => filterName(e.target.value)}></input>
+                                    <input id="filterUserId" type="text" className="inputs-admin"
+                                           placeholder="Filter by user ID" onChange={(e) => filterUserId(e.target.value)}></input>
                                 </div>
                                 <div>
-                                    <input id="filterEmail" type="text" className="inputs-admin"
-                                           placeholder="Filter by email" onChange={(e) => filterEmail(e.target.value)}></input>
+                                    <input id="filterDate" type="text" className="inputs-admin"
+                                           placeholder="Filter by date" onChange={(e) => filterDate(e.target.value)}></input>
                                 </div>
                                 <div>
-                                    <input id="filterPhone" type="text" className="inputs-admin"
-                                           placeholder="Filter by phone number" onChange={(e) => filterPhone(e.target.value)}></input>
+                                    <input id="filterRating" type="text" className="inputs-admin"
+                                           placeholder="Filter by rating" onChange={(e) => filterRating(e.target.value)}></input>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +183,7 @@ export default function FeedbackList() {
                                 <thead>
                                 <tr>
                                     <th>User ID</th>
-                                    <th>Date</th>
+                                    <th style={{ width: '20%' }}>Date</th>
                                     <th>Rating</th>
                                     <th style={{ width: '70%' }}>Feedback</th>
                                     <th>Is approved</th>
